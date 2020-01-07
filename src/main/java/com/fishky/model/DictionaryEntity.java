@@ -1,6 +1,7 @@
 package com.fishky.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "dictionary", schema = "Xx2w786u23", catalog = "")

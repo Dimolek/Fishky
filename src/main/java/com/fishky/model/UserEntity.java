@@ -1,23 +1,26 @@
 package com.fishky.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "user", schema = "Xx2w786u23", catalog = "")
+@NoArgsConstructor
 public class UserEntity {
-    private int idUser;
+    private long idUser;
     private String username;
     private String password;
     private Timestamp createTime;
 
     @Id
     @Column(name = "id_user")
-    public int getIdUser() {
+    public long getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
 
@@ -51,6 +54,19 @@ public class UserEntity {
         this.createTime = createTime;
     }
 
+    public UserEntity(long idUser, String username, String password, Timestamp createTime) {
+        this.idUser = idUser;
+        this.username = username;
+        this.password = password;
+        this.createTime = createTime;
+    }
+
+    public UserEntity(String username, String password, Timestamp createTime) {
+        this.username = username;
+        this.password = password;
+        this.createTime = createTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,7 +84,7 @@ public class UserEntity {
 
     @Override
     public int hashCode() {
-        int result = idUser;
+        int result = (int)idUser;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
