@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserEntity modify() {
+    public UserEntity modify(UserEntity user) {
         return null;
     }
 
