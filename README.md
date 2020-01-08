@@ -8,9 +8,9 @@ An Internet application to help you train your language skills by imitating flas
   * [Spring](https://spring.io/) - Application framework
   * [Hibernate](https://hibernate.org) - Object-relational mapping framework
   * [Lombok](https://projectlombok.org/) - External library to cleanup the code
-  * [ ] [JUnit](https://junit.org/junit5/) - Testing framework
+  * [ ] _[JUnit](https://junit.org/junit5/) - Testing framework (TODO)_
 * [MySql](https://www.mysql.com/) - Database
-* [ ] [Electron](https://electronjs.org/) - Frontend
+* [ ] _[Electron](https://electronjs.org/) - Frontend (TODO)_
 
 
 
