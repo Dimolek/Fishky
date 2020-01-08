@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
 @NoArgsConstructor(force=true)
+@AllArgsConstructor
 @Getter
 public class UserCreateDto {
 

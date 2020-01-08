@@ -4,6 +4,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "Xx2w786u23", catalog = "")
@@ -13,6 +15,7 @@ public class UserEntity {
     private String username;
     private String password;
     private Timestamp createTime;
+    private Set<DictionaryEntity> dictionaries = new HashSet<>();
 
     @Id
     @Column(name = "id_user")
@@ -25,7 +28,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     public String getUsername() {
         return username;
     }
@@ -35,7 +38,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -45,13 +48,22 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "create_time")
+    @Column(name = "create_time", nullable = false)
     public Timestamp getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Set<DictionaryEntity> getDictionaries() {
+        return dictionaries;
+    }
+
+    public void setDictionaries(Set<DictionaryEntity> dictionaries) {
+        this.dictionaries = dictionaries;
     }
 
     public UserEntity(long idUser, String username, String password, Timestamp createTime) {
@@ -84,7 +96,7 @@ public class UserEntity {
 
     @Override
     public int hashCode() {
-        int result = (int)idUser;
+        int result = (int) idUser;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);

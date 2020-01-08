@@ -1,15 +1,16 @@
 package com.fishky.model.repository.implemenetation;
 
-import com.fishky.model.DictionaryListEntity;
-import com.fishky.model.repository.orm.DictionaryListOrmRepository;
-import com.fishky.model.repository.DictionaryListRepository;
+import com.fishky.model.TranslationEntity;
+import com.fishky.model.repository.TranslationRepository;
+import com.fishky.model.repository.orm.TranslationOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class DictionaryListRepositoryImpl implements DictionaryListRepository {
+public class TranslationRepositoryImpl implements TranslationRepository {
+
     @Autowired
-    private DictionaryListOrmRepository ormRepository;
+    private TranslationOrmRepository ormRepository;
 
     @Override
     public Integer save() {
@@ -17,7 +18,7 @@ public class DictionaryListRepositoryImpl implements DictionaryListRepository {
     }
 
     @Override
-    public DictionaryListEntity modify() {
+    public TranslationEntity modify() {
         return null;
     }
 
@@ -27,7 +28,7 @@ public class DictionaryListRepositoryImpl implements DictionaryListRepository {
     }
 
     @Override
-    public DictionaryListEntity read() {
+    public TranslationEntity read() {
         return null;
     }
 }

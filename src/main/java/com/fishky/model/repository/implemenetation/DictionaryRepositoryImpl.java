@@ -5,15 +5,18 @@ import com.fishky.model.repository.orm.DictionaryOrmRepository;
 import com.fishky.model.repository.DictionaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class DictionaryRepositoryImpl implements DictionaryRepository {
+
     @Autowired
     private DictionaryOrmRepository ormRepository;
 
     @Override
-    public Integer save() {
-        return null;
+    public Integer save(DictionaryEntity dictionary) {
+        return ormRepository.saveAndFlush(dictionary).getIdDictionary();
     }
 
     @Override

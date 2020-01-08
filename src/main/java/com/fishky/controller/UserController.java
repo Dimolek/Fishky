@@ -14,13 +14,12 @@ public class UserController {
     private UserService service;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/add")
+    @RequestMapping(method = RequestMethod.POST, value = "/addUser")
     public IdDto add(@RequestBody UserCreateDto user) {
-        IdDto abc = service.add(user);
-        return abc;
+        return service.add(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/findById")
+    @RequestMapping(method = RequestMethod.GET, value = "/findUserById")
     public UserDto find(@RequestParam(value="id") String id) {
         return service.read(IdDto.of(id));
     }

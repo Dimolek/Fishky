@@ -1,16 +1,20 @@
 package com.fishky.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "dictionary", schema = "Xx2w786u23", catalog = "")
-@IdClass(DictionaryEntityPK.class)
+@NoArgsConstructor
 public class DictionaryEntity {
     private int idDictionary;
-    private String word;
-    private String translation;
-    private int dictionaryListIdDictionaryList;
+    private String name;
+    private String language;
+    private UserEntity user;
+    private Set<TranslationEntity> translations = new HashSet<>();
 
     @Id
     @Column(name = "id_dictionary")
@@ -23,33 +27,55 @@ public class DictionaryEntity {
     }
 
     @Basic
-    @Column(name = "word")
-    public String getWord() {
-        return word;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
-    @Column(name = "translation")
-    public String getTranslation() {
-        return translation;
+    @Column(name = "language")
+    public String getLanguage() {
+        return language;
     }
 
-    public void setTranslation(String translation) {
-        this.translation = translation;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
-    @Id
-    @Column(name = "dictionary_list_id_dictionary_list")
-    public int getDictionaryListIdDictionaryList() {
-        return dictionaryListIdDictionaryList;
+    @ManyToOne
+    @JoinColumn(name = "user_id_user", nullable = false)
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setDictionaryListIdDictionaryList(int dictionaryListIdDictionaryList) {
-        this.dictionaryListIdDictionaryList = dictionaryListIdDictionaryList;
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    @OneToMany(mappedBy = "dictionary")
+    public Set<TranslationEntity> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(Set<TranslationEntity> translations) {
+        this.translations = translations;
+    }
+
+    public DictionaryEntity(int idDictionary, String language, String name, UserEntity user) {
+        this.idDictionary = idDictionary;
+        this.language = language;
+        this.name = name;
+        this.user = user;
+    }
+
+    public DictionaryEntity(String language, String name, UserEntity user) {
+        this.language = language;
+        this.name = name;
+        this.user = user;
     }
 
     @Override
@@ -60,9 +86,8 @@ public class DictionaryEntity {
         DictionaryEntity that = (DictionaryEntity) o;
 
         if (idDictionary != that.idDictionary) return false;
-        if (dictionaryListIdDictionaryList != that.dictionaryListIdDictionaryList) return false;
-        if (word != null ? !word.equals(that.word) : that.word != null) return false;
-        if (translation != null ? !translation.equals(that.translation) : that.translation != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (language != null ? !language.equals(that.language) : that.language != null) return false;
 
         return true;
     }
@@ -70,9 +95,8 @@ public class DictionaryEntity {
     @Override
     public int hashCode() {
         int result = idDictionary;
-        result = 31 * result + (word != null ? word.hashCode() : 0);
-        result = 31 * result + (translation != null ? translation.hashCode() : 0);
-        result = 31 * result + dictionaryListIdDictionaryList;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (language != null ? language.hashCode() : 0);
         return result;
     }
 }

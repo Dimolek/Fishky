@@ -16,20 +16,20 @@ public class UserServiceImpl implements UserService {
     private UserAdapter adapter;
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     @Override
     public IdDto add(UserCreateDto user) {
         return IdDto.of(
                 String.valueOf(
-                        repository.save(
+                        userRepository.save(
                                 adapter.fromDto(user))));
     }
 
     @Override
     public UserDto read(IdDto id) {
         return adapter.toDto(
-                repository.read(
-                        Integer.valueOf(id.getId())));
+                userRepository.read(
+                        Long.valueOf(id.getId())));
     }
 }

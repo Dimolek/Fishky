@@ -24,8 +24,7 @@ public class UserAdapterImpl implements UserAdapter {
     @Override
     public UserDto toDto(UserEntity user) {
         return UserDto.of(
-                String.valueOf(
-                        user.getIdUser()),
+                String.valueOf(user.getIdUser()),
                 user.getUsername(),
                 user.getPassword());
     }

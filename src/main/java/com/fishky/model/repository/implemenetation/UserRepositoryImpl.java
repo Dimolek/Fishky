@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class UserRepositoryImpl implements UserRepository {
+
     @Autowired
     private UserOrmRepository ormRepository;
 
