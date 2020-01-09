@@ -1,8 +1,8 @@
 package com.fishky.model.repository.implemenetation;
 
 import com.fishky.model.UserEntity;
-import com.fishky.model.repository.orm.UserOrmRepository;
 import com.fishky.model.repository.UserRepository;
+import com.fishky.model.repository.orm.UserOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +16,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Long save(final UserEntity user) {
-        // Always returns 0
-        // TODO: make sessions
         return ormRepository.saveAndFlush(user).getIdUser();
     }
 
     @Override
-    public UserEntity modify(UserEntity user) {
+    public UserEntity read(final Long id) {
+        return ormRepository.findById(id).orElse(null);
+    }
+
+
+    @Override
+    public UserEntity modify() {
         return null;
     }
 
@@ -31,8 +35,4 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
-    @Override
-    public UserEntity read(Long id) {
-        return ormRepository.findById(id).orElse(null);
-    }
 }

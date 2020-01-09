@@ -1,7 +1,6 @@
 package com.fishky.adapter.implementation;
 
 import com.fishky.adapter.UserAdapter;
-import com.fishky.dto.abstracts.IdDto;
 import com.fishky.dto.user.UserCreateDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.model.UserEntity;
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 public class UserAdapterImpl implements UserAdapter {
 
     @Override
-    public UserEntity fromDto(UserCreateDto user) {
+    public UserEntity fromDto(final UserCreateDto user) {
         return new UserEntity(
                 user.getUsername(),
                 user.getPassword(),
@@ -22,7 +21,7 @@ public class UserAdapterImpl implements UserAdapter {
     }
 
     @Override
-    public UserDto toDto(UserEntity user) {
+    public UserDto toDto(final UserEntity user) {
         return UserDto.of(
                 String.valueOf(user.getIdUser()),
                 user.getUsername(),

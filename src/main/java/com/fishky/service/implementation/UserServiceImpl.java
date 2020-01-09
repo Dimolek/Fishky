@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public IdDto add(UserCreateDto user) {
+    public IdDto add(final UserCreateDto user) {
         return IdDto.of(
                 String.valueOf(
                         userRepository.save(
@@ -27,9 +27,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto read(IdDto id) {
+    public UserDto read(final IdDto id) {
         return adapter.toDto(
                 userRepository.read(
                         Long.valueOf(id.getId())));
     }
+
 }

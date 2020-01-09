@@ -6,6 +6,9 @@ import com.fishky.model.repository.orm.TranslationOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class TranslationRepositoryImpl implements TranslationRepository {
 
@@ -13,7 +16,22 @@ public class TranslationRepositoryImpl implements TranslationRepository {
     private TranslationOrmRepository ormRepository;
 
     @Override
-    public Integer save() {
+    public Long save(final TranslationEntity translation) {
+
+        return ormRepository.saveAndFlush(translation).getIdTranslation();
+    }
+
+    @Override
+    public List<Long> saveMany(List<TranslationEntity> translations) {
+
+        return ormRepository.saveAll(translations)
+                .stream()
+                .map(TranslationEntity::getIdTranslation)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public TranslationEntity read() {
         return null;
     }
 
@@ -27,8 +45,4 @@ public class TranslationRepositoryImpl implements TranslationRepository {
         return null;
     }
 
-    @Override
-    public TranslationEntity read() {
-        return null;
-    }
 }

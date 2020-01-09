@@ -18,6 +18,7 @@ public class DictionaryEntity {
 
     @Id
     @Column(name = "id_dictionary")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getIdDictionary() {
         return idDictionary;
     }
@@ -65,7 +66,7 @@ public class DictionaryEntity {
         this.translations = translations;
     }
 
-    public DictionaryEntity(int idDictionary, String language, String name, UserEntity user) {
+    public DictionaryEntity(long idDictionary, String language, String name, UserEntity user) {
         this.idDictionary = idDictionary;
         this.language = language;
         this.name = name;

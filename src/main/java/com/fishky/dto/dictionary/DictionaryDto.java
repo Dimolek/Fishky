@@ -1,11 +1,14 @@
 package com.fishky.dto.dictionary;
 
 import com.fishky.dto.abstracts.AbstractDto;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Getter
 public class DictionaryDto extends AbstractDto {
 
@@ -21,7 +24,7 @@ public class DictionaryDto extends AbstractDto {
     @NotEmpty
     private final String userId;
 
-    public DictionaryDto(final String id, final String name, final String language, final String userId) {
+    protected DictionaryDto(final String id, final String name, final String language, final String userId) {
         super(id);
         this.name = name;
         this.language = language;

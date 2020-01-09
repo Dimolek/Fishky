@@ -4,7 +4,8 @@ import com.fishky.model.UserEntity;
 
 public interface UserRepository {
     Long save(UserEntity user);
+    UserEntity read(Long id);
     UserEntity modify();
     Boolean delete();
-    UserEntity read(Long id);
+
 }

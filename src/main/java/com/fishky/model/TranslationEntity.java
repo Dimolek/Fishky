@@ -1,22 +1,26 @@
 package com.fishky.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "translation", schema = "Xx2w786u23", catalog = "")
+@NoArgsConstructor
 public class TranslationEntity {
-    private int idTranslation;
+    private long idTranslation;
     private String word;
     private String translated;
     private DictionaryEntity dictionary;
 
     @Id
     @Column(name = "id_translation")
-    public int getIdTranslation() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long getIdTranslation() {
         return idTranslation;
     }
 
-    public void setIdTranslation(int idTranslation) {
+    public void setIdTranslation(long idTranslation) {
         this.idTranslation = idTranslation;
     }
 
@@ -41,12 +45,25 @@ public class TranslationEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_dictionary", nullable = false)
+    @JoinColumn(name = "dictionary_id_dictionary", nullable = false)
     public DictionaryEntity getDictionary() {
         return dictionary;
     }
 
     public void setDictionary(DictionaryEntity dictionary) {
+        this.dictionary = dictionary;
+    }
+
+    public TranslationEntity(long idTranslation, String word, String translated, DictionaryEntity dictionary) {
+        this.idTranslation = idTranslation;
+        this.word = word;
+        this.translated = translated;
+        this.dictionary = dictionary;
+    }
+
+    public TranslationEntity(String word, String translated, DictionaryEntity dictionary) {
+        this.word = word;
+        this.translated = translated;
         this.dictionary = dictionary;
     }
 
@@ -66,7 +83,7 @@ public class TranslationEntity {
 
     @Override
     public int hashCode() {
-        int result = idTranslation;
+        int result = (int) idTranslation;
         result = 31 * result + (word != null ? word.hashCode() : 0);
         result = 31 * result + (translated != null ? translated.hashCode() : 0);
         return result;
