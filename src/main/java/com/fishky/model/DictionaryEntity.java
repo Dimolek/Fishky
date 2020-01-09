@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "dictionary", schema = "Xx2w786u23", catalog = "")
 @NoArgsConstructor
 public class DictionaryEntity {
-    private int idDictionary;
+    private long idDictionary;
     private String name;
     private String language;
     private UserEntity user;
@@ -18,11 +18,11 @@ public class DictionaryEntity {
 
     @Id
     @Column(name = "id_dictionary")
-    public int getIdDictionary() {
+    public long getIdDictionary() {
         return idDictionary;
     }
 
-    public void setIdDictionary(int idDictionary) {
+    public void setIdDictionary(long idDictionary) {
         this.idDictionary = idDictionary;
     }
 
@@ -94,7 +94,7 @@ public class DictionaryEntity {
 
     @Override
     public int hashCode() {
-        int result = idDictionary;
+        int result = (int) idDictionary;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (language != null ? language.hashCode() : 0);
         return result;

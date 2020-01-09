@@ -15,7 +15,7 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
     private DictionaryOrmRepository ormRepository;
 
     @Override
-    public Integer save(DictionaryEntity dictionary) {
+    public Long save(DictionaryEntity dictionary) {
         return ormRepository.saveAndFlush(dictionary).getIdDictionary();
     }
 
@@ -30,7 +30,7 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
     }
 
     @Override
-    public DictionaryEntity read() {
-        return null;
+    public DictionaryEntity read(Long id) {
+        return ormRepository.findById(id).orElse(null);
     }
 }

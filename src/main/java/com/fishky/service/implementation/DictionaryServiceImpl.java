@@ -3,6 +3,8 @@ package com.fishky.service.implementation;
 import com.fishky.adapter.DictionaryAdapter;
 import com.fishky.dto.abstracts.IdDto;
 import com.fishky.dto.dictionary.DictionaryCreateDto;
+import com.fishky.dto.dictionary.DictionaryDto;
+import com.fishky.dto.user.UserDto;
 import com.fishky.model.repository.DictionaryRepository;
 import com.fishky.model.repository.UserRepository;
 import com.fishky.service.DictionaryService;
@@ -28,5 +30,12 @@ public class DictionaryServiceImpl implements DictionaryService {
                         dictionaryRepository.save(
                                 adapter.fromDto(dictionary, userRepository.read(
                                         Long.valueOf(dictionary.getUserId()))))));
+    }
+
+    @Override
+    public DictionaryDto read(IdDto id) {
+        return adapter.toDto(
+                dictionaryRepository.read(
+                        Long.valueOf(id.getId())));
     }
 }
