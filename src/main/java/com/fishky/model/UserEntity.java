@@ -58,7 +58,7 @@ public class UserEntity {
         this.createTime = createTime;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public Set<DictionaryEntity> getDictionaries() {
         return dictionaries;
     }

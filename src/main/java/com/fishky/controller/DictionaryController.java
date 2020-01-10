@@ -9,6 +9,8 @@ import com.fishky.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class DictionaryController {
 
@@ -25,6 +27,11 @@ public class DictionaryController {
         return service.read(IdDto.of(id));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = ConstURLMapping.FIND_USERS_DICTIONARIES)
+    public List<DictionaryDto> findUsersDictionaries(@RequestParam(value = ConstURLMapping.ENTITY_ID) final String userId) {
+        return service.readUsersDictionaries(IdDto.of(userId));
+    }
+
     @RequestMapping(method = RequestMethod.PUT, value = ConstURLMapping.MODIFY_DICTIONARY)
     public DictionaryDto modify(@RequestBody final DictionaryDto dictionary) {
         return service.modify(dictionary);
@@ -34,7 +41,4 @@ public class DictionaryController {
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
     }
-
-
-
 }

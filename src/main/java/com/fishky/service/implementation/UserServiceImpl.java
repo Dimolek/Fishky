@@ -33,4 +33,18 @@ public class UserServiceImpl implements UserService {
                         Long.valueOf(id.getId())));
     }
 
+    @Override
+    public UserDto modify(UserDto user) {
+        return adapter.toDto(
+                userRepository.modify(
+                        adapter.fromDto(user,
+                                userRepository.read(Long.valueOf(user.getId())).getCreateTime().toLocalDateTime())));
+    }
+
+    @Override
+    public Boolean delete(IdDto id) {
+        //Also, delete all dependent dictionaries
+        return userRepository.delete(Long.valueOf(id.getId()));
+    }
+
 }

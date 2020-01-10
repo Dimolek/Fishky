@@ -7,4 +7,6 @@ import com.fishky.dto.user.UserDto;
 public interface UserService {
     IdDto add(UserCreateDto user);
     UserDto read(IdDto id);
+    UserDto modify(UserDto user);
+    Boolean delete(IdDto id);
 }

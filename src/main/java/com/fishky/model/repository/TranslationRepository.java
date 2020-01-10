@@ -7,8 +7,11 @@ import java.util.List;
 public interface TranslationRepository {
     Long save(TranslationEntity translation);
     List<Long> saveMany(List<TranslationEntity> translations);
+
+    //consider later
     TranslationEntity read();
-    TranslationEntity modify();
-    Boolean delete();
+
+    TranslationEntity modify(TranslationEntity translation);
+    Boolean delete(Long id);
 
 }

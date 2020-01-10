@@ -11,6 +11,8 @@ import com.fishky.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DictionaryServiceImpl implements DictionaryService {
 
@@ -37,6 +39,12 @@ public class DictionaryServiceImpl implements DictionaryService {
         return adapter.toDto(
                 dictionaryRepository.read(
                         Long.valueOf(id.getId())));
+    }
+
+    @Override
+    public List<DictionaryDto> readUsersDictionaries(IdDto userId) {
+        return adapter.toDto(
+                dictionaryRepository.readUsersDictionaries(Long.valueOf(userId.getId())));
     }
 
 

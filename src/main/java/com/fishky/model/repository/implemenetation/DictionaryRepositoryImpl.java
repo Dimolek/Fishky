@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public class DictionaryRepositoryImpl implements DictionaryRepository {
@@ -22,6 +24,11 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
     @Override
     public DictionaryEntity read(final Long id) {
         return ormRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<DictionaryEntity> readUsersDictionaries(Long userId) {
+        return ormRepository.findByUser_IdUser(userId);
     }
 
     @Override

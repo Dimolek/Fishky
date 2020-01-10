@@ -19,12 +19,18 @@ public class UserController {
         return service.add(user);
     }
 
-    //modify
-
-    //delete
-
     @RequestMapping(method = RequestMethod.GET, value = ConstURLMapping.FIND_USER)
     public UserDto find(@RequestParam(value = ConstURLMapping.ENTITY_ID) final String id) {
         return service.read(IdDto.of(id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = ConstURLMapping.MODIFY_USER)
+    public UserDto modify(@RequestBody final UserDto user) {
+        return service.modify(user);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = ConstURLMapping.DELETE_USER)
+    public Boolean delete(@RequestBody final IdDto id) {
+        return service.delete(id);
     }
 }

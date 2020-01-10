@@ -36,13 +36,16 @@ public class TranslationRepositoryImpl implements TranslationRepository {
     }
 
     @Override
-    public TranslationEntity modify() {
-        return null;
+    public TranslationEntity modify(TranslationEntity translation) {
+        //Possible 'exists' validation
+        return ormRepository.saveAndFlush(translation);
     }
 
     @Override
-    public Boolean delete() {
-        return null;
+    public Boolean delete(Long id) {
+        //Possible 'exists' validation
+        ormRepository.deleteById(id);
+        return !ormRepository.existsById(id);
     }
 
 }

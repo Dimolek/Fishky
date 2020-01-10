@@ -26,13 +26,14 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public UserEntity modify() {
-        return null;
+    public UserEntity modify(UserEntity user) {
+        return ormRepository.saveAndFlush(user);
     }
 
     @Override
-    public Boolean delete() {
-        return null;
+    public Boolean delete(Long id) {
+        ormRepository.deleteById(id);
+        return !ormRepository.existsById(id);
     }
 
 }

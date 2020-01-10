@@ -57,7 +57,7 @@ public class DictionaryEntity {
         this.user = user;
     }
 
-    @OneToMany(mappedBy = "dictionary")
+    @OneToMany(mappedBy = "dictionary", cascade = CascadeType.ALL)
     public Set<TranslationEntity> getTranslations() {
         return translations;
     }

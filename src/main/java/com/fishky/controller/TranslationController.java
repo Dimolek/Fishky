@@ -2,6 +2,7 @@ package com.fishky.controller;
 
 import com.fishky.dto.abstracts.IdDto;
 import com.fishky.dto.translation.TranslationCreateDto;
+import com.fishky.dto.translation.TranslationDto;
 import com.fishky.dto.translation.TranslationsCreateDto;
 import com.fishky.properties.ConstURLMapping;
 import com.fishky.service.TranslationService;
@@ -29,4 +30,13 @@ public class TranslationController {
         return service.addMany(translations);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = ConstURLMapping.MODIFY_TRANSLATION)
+    public TranslationDto modify(@RequestBody final TranslationDto translation) {
+        return service.modify(translation);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = ConstURLMapping.DELETE_TRANSLATION)
+    public Boolean delete(@RequestBody final IdDto id) {
+        return service.delete(id);
+    }
 }

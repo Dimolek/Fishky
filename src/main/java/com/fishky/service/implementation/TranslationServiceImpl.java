@@ -52,11 +52,14 @@ public class TranslationServiceImpl implements TranslationService {
 
     @Override
     public TranslationDto modify(TranslationDto translation) {
-        return null;
+        return adapter.toDto(
+                translationRepository.modify(
+                        adapter.fromDto(translation, dictionaryRepository.read(
+                                Long.valueOf(translation.getDictionaryId())))));
     }
 
     @Override
     public Boolean delete(IdDto id) {
-        return null;
+        return translationRepository.delete(Long.valueOf(id.getId()));
     }
 }

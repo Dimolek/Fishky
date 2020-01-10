@@ -21,6 +21,15 @@ public class UserAdapterImpl implements UserAdapter {
     }
 
     @Override
+    public UserEntity fromDto(UserDto user, LocalDateTime creationTime) {
+        return new UserEntity(
+                Long.parseLong(user.getId()),
+                user.getUsername(),
+                user.getPassword(),
+                Timestamp.valueOf(creationTime));
+    }
+
+    @Override
     public UserDto toDto(final UserEntity user) {
         return UserDto.of(
                 String.valueOf(user.getIdUser()),
