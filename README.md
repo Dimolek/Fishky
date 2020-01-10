@@ -15,7 +15,7 @@ An Internet application to help you train your language skills by imitating flas
 
 
 ## TODO:
-- [ ] adding, editing and removing users and flashcards
+- [x] adding, editing and removing users and flashcards
 - [ ] any form of GUI
 - [ ] user validation and basic security
 - [ ] advanced use of Spring Security
