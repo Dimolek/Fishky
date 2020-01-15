@@ -3,18 +3,17 @@ package com.fishky.model;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "dictionary", schema = "Xx2w786u23", catalog = "")
+@Table(name = "dictionary")
 @NoArgsConstructor
 public class DictionaryEntity {
     private long idDictionary;
     private String name;
     private String language;
     private UserEntity user;
-    private Set<TranslationEntity> translations = new HashSet<>();
+    private Set<TranslationEntity> translations;
 
     @Id
     @Column(name = "id_dictionary")

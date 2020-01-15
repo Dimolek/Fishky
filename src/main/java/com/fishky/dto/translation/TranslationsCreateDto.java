@@ -19,9 +19,9 @@ public class TranslationsCreateDto {
 
     @NotNull
     @NotEmpty
-    private final String dictionaryId;
+    private final Long dictionaryId;
 
-    public static TranslationsCreateDto of(final List<TranslationCreateDto> translations, final String dictionaryId) {
+    public static TranslationsCreateDto of(final List<TranslationCreateDto> translations, final Long dictionaryId) {
         return new TranslationsCreateDto(translations, dictionaryId);
     }
 }

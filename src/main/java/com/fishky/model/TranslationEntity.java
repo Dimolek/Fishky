@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "translation", schema = "Xx2w786u23", catalog = "")
+@Table(name = "translation")
 @NoArgsConstructor
 public class TranslationEntity {
     private long idTranslation;

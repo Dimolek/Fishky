@@ -1,4 +1,4 @@
-package com.fishky.adapter;
+package com.fishky.mapper;
 
 import com.fishky.dto.dictionary.DictionaryCreateDto;
 import com.fishky.dto.dictionary.DictionaryDto;
@@ -8,7 +8,7 @@ import com.fishky.model.UserEntity;
 
 import java.util.List;
 
-public interface DictionaryAdapter {
+public interface DictionaryMapper {
     DictionaryEntity fromDto(DictionaryCreateDto dictionary, UserEntity user);
     DictionaryEntity fromDto(DictionaryDto dictionary, UserEntity user);
     DictionaryResponseDto toDto(DictionaryEntity dictionary);

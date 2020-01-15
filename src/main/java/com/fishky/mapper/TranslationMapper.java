@@ -1,4 +1,4 @@
-package com.fishky.adapter;
+package com.fishky.mapper;
 
 import com.fishky.dto.translation.TranslationCreateDto;
 import com.fishky.dto.translation.TranslationDto;
@@ -8,7 +8,7 @@ import com.fishky.model.TranslationEntity;
 
 import java.util.List;
 
-public interface TranslationAdapter {
+public interface TranslationMapper {
     TranslationEntity fromDto(TranslationCreateDto translation, DictionaryEntity dictionary);
     List<TranslationEntity> fromDto(TranslationsCreateDto translations, DictionaryEntity dictionary);
     TranslationEntity fromDto(TranslationDto translation, DictionaryEntity dictionary);

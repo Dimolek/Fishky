@@ -9,11 +9,11 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class IdDto extends AbstractDto {
 
-    private IdDto(final String id) {
+    private IdDto(final Long id) {
         super(id);
     }
 
-    public static IdDto of(final String id) {
+    public static IdDto of(final Long id) {
         return new IdDto(id);
     }
 }

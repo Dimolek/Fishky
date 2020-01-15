@@ -1,8 +1,8 @@
-package com.fishky.model.repository.implemenetation;
+package com.fishky.repository.implemenetation;
 
 import com.fishky.model.TranslationEntity;
-import com.fishky.model.repository.TranslationRepository;
-import com.fishky.model.repository.orm.TranslationOrmRepository;
+import com.fishky.repository.TranslationRepository;
+import com.fishky.repository.orm.TranslationOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

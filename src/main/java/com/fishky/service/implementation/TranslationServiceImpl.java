@@ -1,24 +1,26 @@
 package com.fishky.service.implementation;
 
-import com.fishky.adapter.TranslationAdapter;
 import com.fishky.dto.abstracts.IdDto;
 import com.fishky.dto.translation.TranslationCreateDto;
 import com.fishky.dto.translation.TranslationDto;
 import com.fishky.dto.translation.TranslationsCreateDto;
-import com.fishky.model.repository.DictionaryRepository;
-import com.fishky.model.repository.TranslationRepository;
+import com.fishky.mapper.TranslationMapper;
+import com.fishky.repository.DictionaryRepository;
+import com.fishky.repository.TranslationRepository;
 import com.fishky.service.TranslationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class TranslationServiceImpl implements TranslationService {
 
     @Autowired
-    private TranslationAdapter adapter;
+    private TranslationMapper mapper;
 
     @Autowired
     private TranslationRepository translationRepository;
@@ -29,19 +31,18 @@ public class TranslationServiceImpl implements TranslationService {
     @Override
     public IdDto add(TranslationCreateDto translation) {
         return IdDto.of(
-                String.valueOf(
                         translationRepository.save(
-                                adapter.fromDto(translation,
-                                        dictionaryRepository.read(Long.valueOf(translation.getDictionaryId()))))));
+                                mapper.fromDto(translation,
+                                        dictionaryRepository.read(translation.getDictionaryId()))));
     }
 
     @Override
     public List<IdDto> addMany(TranslationsCreateDto translations) {
         return translationRepository
-                .saveMany(adapter.fromDto(translations,
-                        dictionaryRepository.read(Long.valueOf(translations.getDictionaryId()))))
+                .saveMany(mapper.fromDto(translations,
+                        dictionaryRepository.read(translations.getDictionaryId())))
                 .stream()
-                .map(id -> IdDto.of(String.valueOf(id)))
+                .map(IdDto::of)
                 .collect(Collectors.toList());
     }
 
@@ -52,14 +53,13 @@ public class TranslationServiceImpl implements TranslationService {
 
     @Override
     public TranslationDto modify(TranslationDto translation) {
-        return adapter.toDto(
+        return mapper.toDto(
                 translationRepository.modify(
-                        adapter.fromDto(translation, dictionaryRepository.read(
-                                Long.valueOf(translation.getDictionaryId())))));
+                        mapper.fromDto(translation, dictionaryRepository.read(translation.getDictionaryId()))));
     }
 
     @Override
     public Boolean delete(IdDto id) {
-        return translationRepository.delete(Long.valueOf(id.getId()));
+        return translationRepository.delete(id.getId());
     }
 }

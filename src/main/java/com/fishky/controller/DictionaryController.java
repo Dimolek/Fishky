@@ -17,27 +17,27 @@ public class DictionaryController {
     @Autowired
     private DictionaryService service;
 
-    @RequestMapping(method = RequestMethod.POST, value = ConstURLMapping.ADD_DICTIONARY)
+    @PostMapping(value = ConstURLMapping.ADD_DICTIONARY)
     public IdDto add(@RequestBody final DictionaryCreateDto dictionary) {
         return service.add(dictionary);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = ConstURLMapping.FIND_DICTIONARY)
+    @GetMapping(value = ConstURLMapping.FIND_DICTIONARY)
     public DictionaryResponseDto find(@RequestParam(value = ConstURLMapping.ENTITY_ID) final String id) {
-        return service.read(IdDto.of(id));
+        return service.read(IdDto.of(Long.valueOf((id))));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = ConstURLMapping.FIND_USERS_DICTIONARIES)
+    @GetMapping(value = ConstURLMapping.FIND_USERS_DICTIONARIES)
     public List<DictionaryDto> findUsersDictionaries(@RequestParam(value = ConstURLMapping.ENTITY_ID) final String userId) {
-        return service.readUsersDictionaries(IdDto.of(userId));
+        return service.readUsersDictionaries(IdDto.of(Long.valueOf((userId))));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = ConstURLMapping.MODIFY_DICTIONARY)
+    @PutMapping(value = ConstURLMapping.MODIFY_DICTIONARY)
     public DictionaryDto modify(@RequestBody final DictionaryDto dictionary) {
         return service.modify(dictionary);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = ConstURLMapping.DELETE_DICTIONARY)
+    @DeleteMapping(value = ConstURLMapping.DELETE_DICTIONARY)
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
     }

@@ -22,9 +22,9 @@ public class TranslationCreateDto {
 
     @NotNull
     @NotEmpty
-    private final String dictionaryId;
+    private final Long dictionaryId;
 
-    public static TranslationCreateDto of(final String word, final String translated, final String dictionaryId) {
+    public static TranslationCreateDto of(final String word, final String translated, final Long dictionaryId) {
         return new TranslationCreateDto(word, translated, dictionaryId);
     }
 }

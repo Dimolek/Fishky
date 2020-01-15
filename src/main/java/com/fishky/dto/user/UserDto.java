@@ -17,13 +17,13 @@ public class UserDto extends AbstractDto {
     @NotEmpty
     private final String password;
 
-    private UserDto(final String id, final String username, final String password) {
+    private UserDto(final Long id, final String username, final String password) {
         super(id);
         this.username = username;
         this.password = password;
     }
 
-    public static UserDto of(final String id, final String username, final String password) {
+    public static UserDto of(final Long id, final String username, final String password) {
         return new UserDto(id, username, password);
     }
 }

@@ -1,14 +1,12 @@
-package com.fishky.model.repository.implemenetation;
+package com.fishky.repository.implemenetation;
 
 import com.fishky.model.UserEntity;
-import com.fishky.model.repository.UserRepository;
-import com.fishky.model.repository.orm.UserOrmRepository;
+import com.fishky.repository.UserRepository;
+import com.fishky.repository.orm.UserOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public class UserRepositoryImpl implements UserRepository {
 
     @Autowired

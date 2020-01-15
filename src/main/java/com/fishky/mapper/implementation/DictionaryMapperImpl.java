@@ -1,10 +1,10 @@
-package com.fishky.adapter.implementation;
+package com.fishky.mapper.implementation;
 
-import com.fishky.adapter.DictionaryAdapter;
-import com.fishky.adapter.TranslationAdapter;
 import com.fishky.dto.dictionary.DictionaryCreateDto;
 import com.fishky.dto.dictionary.DictionaryDto;
 import com.fishky.dto.dictionary.DictionaryResponseDto;
+import com.fishky.mapper.DictionaryMapper;
+import com.fishky.mapper.TranslationMapper;
 import com.fishky.model.DictionaryEntity;
 import com.fishky.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class DictionaryAdapterImpl implements DictionaryAdapter {
+public class DictionaryMapperImpl implements DictionaryMapper {
 
     @Autowired
-    TranslationAdapter translationAdapter;
+    TranslationMapper translationMapper;
 
     @Override
     public DictionaryEntity fromDto(final DictionaryCreateDto dictionary, final UserEntity user) {
@@ -30,7 +30,7 @@ public class DictionaryAdapterImpl implements DictionaryAdapter {
     @Override
     public DictionaryEntity fromDto(final DictionaryDto dictionary, final UserEntity user) {
         return new DictionaryEntity(
-                Long.parseLong(dictionary.getId()),
+                dictionary.getId(),
                 dictionary.getName(),
                 dictionary.getLanguage(),
                 user);
@@ -39,13 +39,13 @@ public class DictionaryAdapterImpl implements DictionaryAdapter {
     @Override
     public DictionaryResponseDto toDto(final DictionaryEntity dictionary) {
         return DictionaryResponseDto.of(
-                String.valueOf(dictionary.getIdDictionary()),
+                dictionary.getIdDictionary(),
                 dictionary.getName(),
                 dictionary.getLanguage(),
-                String.valueOf(dictionary.getUser().getIdUser()),
+                dictionary.getUser().getIdUser(),
                 dictionary.getTranslations()
                         .stream()
-                        .map(translationEntity -> translationAdapter.toDto(translationEntity))
+                        .map(translationEntity -> translationMapper.toDto(translationEntity))
                         .collect(Collectors.toSet()));
     }
 
@@ -54,10 +54,10 @@ public class DictionaryAdapterImpl implements DictionaryAdapter {
         return dictionaries
                 .stream()
                 .map(entity -> DictionaryDto.of(
-                        String.valueOf(entity.getIdDictionary()),
+                        entity.getIdDictionary(),
                         entity.getName(),
                         entity.getLanguage(),
-                        String.valueOf(entity.getUser().getIdUser())))
+                        entity.getUser().getIdUser()))
                 .collect(Collectors.toList());
     }
 }

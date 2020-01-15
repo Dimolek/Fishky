@@ -14,22 +14,22 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @RequestMapping(method = RequestMethod.POST, value = ConstURLMapping.ADD_USER)
+    @PostMapping(value = ConstURLMapping.ADD_USER)
     public IdDto add(@RequestBody final UserCreateDto user) {
         return service.add(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = ConstURLMapping.FIND_USER)
+    @GetMapping(value = ConstURLMapping.FIND_USER)
     public UserDto find(@RequestParam(value = ConstURLMapping.ENTITY_ID) final String id) {
-        return service.read(IdDto.of(id));
+        return service.read(IdDto.of(Long.valueOf(id)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = ConstURLMapping.MODIFY_USER)
+    @PutMapping(value = ConstURLMapping.MODIFY_USER)
     public UserDto modify(@RequestBody final UserDto user) {
         return service.modify(user);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = ConstURLMapping.DELETE_USER)
+    @DeleteMapping(value = ConstURLMapping.DELETE_USER)
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
     }

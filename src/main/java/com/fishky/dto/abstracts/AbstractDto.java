@@ -6,14 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public abstract class AbstractDto implements Serializable {
+public abstract class AbstractDto {
 
     @NotNull
     @NotEmpty
-    private String id;
+    private Long id;
 }

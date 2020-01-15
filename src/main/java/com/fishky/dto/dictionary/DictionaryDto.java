@@ -22,16 +22,16 @@ public class DictionaryDto extends AbstractDto {
 
     @NotNull
     @NotEmpty
-    private final String userId;
+    private final Long userId;
 
-    protected DictionaryDto(final String id, final String name, final String language, final String userId) {
+    protected DictionaryDto(final Long id, final String name, final String language, final Long userId) {
         super(id);
         this.name = name;
         this.language = language;
         this.userId = userId;
     }
 
-    public static DictionaryDto of(final String id, final String name, final String language, final String userId) {
+    public static DictionaryDto of(final Long id, final String name, final String language, final Long userId) {
         return new DictionaryDto(id, name, language, userId);
     }
 }

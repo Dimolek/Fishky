@@ -4,18 +4,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user", schema = "Xx2w786u23", catalog = "")
+@Table(name = "user")
 @NoArgsConstructor
 public class UserEntity {
     private long idUser;
     private String username;
     private String password;
     private Timestamp createTime;
-    private Set<DictionaryEntity> dictionaries = new HashSet<>();
+    private Set<DictionaryEntity> dictionaries;
 
     @Id
     @Column(name = "id_user")

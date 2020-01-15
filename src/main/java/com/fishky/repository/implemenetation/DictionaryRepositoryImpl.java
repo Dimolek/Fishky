@@ -1,16 +1,14 @@
-package com.fishky.model.repository.implemenetation;
+package com.fishky.repository.implemenetation;
 
 import com.fishky.model.DictionaryEntity;
-import com.fishky.model.repository.DictionaryRepository;
-import com.fishky.model.repository.orm.DictionaryOrmRepository;
+import com.fishky.repository.DictionaryRepository;
+import com.fishky.repository.orm.DictionaryOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-@Transactional
 public class DictionaryRepositoryImpl implements DictionaryRepository {
 
     @Autowired

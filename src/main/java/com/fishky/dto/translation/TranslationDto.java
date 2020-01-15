@@ -19,16 +19,16 @@ public class TranslationDto extends AbstractDto {
 
     @NotNull
     @NotEmpty
-    private final String dictionaryId;
+    private final Long dictionaryId;
 
-    private TranslationDto(final String id, final String word, final String translated, final String dictionaryId) {
+    private TranslationDto(final Long id, final String word, final String translated, final Long dictionaryId) {
         super(id);
         this.word = word;
         this.translated = translated;
         this.dictionaryId = dictionaryId;
     }
 
-    public static TranslationDto of(final String id, final String word, final String translated, final String dictionaryId) {
+    public static TranslationDto of(final Long id, final String word, final String translated, final Long dictionaryId) {
         return new TranslationDto(id, word, translated, dictionaryId);
     }
 }

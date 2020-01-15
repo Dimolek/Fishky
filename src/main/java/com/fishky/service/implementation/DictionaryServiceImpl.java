@@ -1,23 +1,25 @@
 package com.fishky.service.implementation;
 
-import com.fishky.adapter.DictionaryAdapter;
 import com.fishky.dto.abstracts.IdDto;
 import com.fishky.dto.dictionary.DictionaryCreateDto;
 import com.fishky.dto.dictionary.DictionaryDto;
 import com.fishky.dto.dictionary.DictionaryResponseDto;
-import com.fishky.model.repository.DictionaryRepository;
-import com.fishky.model.repository.UserRepository;
+import com.fishky.mapper.DictionaryMapper;
+import com.fishky.repository.DictionaryRepository;
+import com.fishky.repository.UserRepository;
 import com.fishky.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class DictionaryServiceImpl implements DictionaryService {
 
     @Autowired
-    private DictionaryAdapter adapter;
+    private DictionaryMapper mapper;
 
     @Autowired
     private DictionaryRepository dictionaryRepository;
@@ -28,37 +30,33 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public IdDto add(final DictionaryCreateDto dictionary) {
         return IdDto.of(
-                String.valueOf(
                         dictionaryRepository.save(
-                                adapter.fromDto(dictionary, userRepository.read(
-                                        Long.valueOf(dictionary.getUserId()))))));
+                                mapper.fromDto(dictionary, userRepository.read(dictionary.getUserId()))));
     }
 
     @Override
     public DictionaryResponseDto read(final IdDto id) {
-        return adapter.toDto(
-                dictionaryRepository.read(
-                        Long.valueOf(id.getId())));
+        return mapper.toDto(
+                dictionaryRepository.read(id.getId()));
     }
 
     @Override
     public List<DictionaryDto> readUsersDictionaries(IdDto userId) {
-        return adapter.toDto(
-                dictionaryRepository.readUsersDictionaries(Long.valueOf(userId.getId())));
+        return mapper.toDto(
+                dictionaryRepository.readUsersDictionaries(userId.getId()));
     }
 
 
     @Override
     public DictionaryResponseDto modify(final DictionaryDto dictionary) {
-        return adapter.toDto(
+        return mapper.toDto(
                 dictionaryRepository.modify(
-                        adapter.fromDto(dictionary, userRepository.read(
-                                Long.valueOf(dictionary.getUserId())))));
+                        mapper.fromDto(dictionary, userRepository.read(dictionary.getUserId()))));
     }
 
     @Override
     public Boolean delete(final IdDto id) {
         //Also, delete all dependent translations (or in DictionaryRepository)
-        return dictionaryRepository.delete(Long.valueOf(id.getId()));
+        return dictionaryRepository.delete(id.getId());
     }
 }

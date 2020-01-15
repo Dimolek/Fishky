@@ -1,4 +1,4 @@
-package com.fishky.model.repository;
+package com.fishky.repository;
 
 import com.fishky.model.TranslationEntity;
 

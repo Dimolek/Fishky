@@ -22,9 +22,9 @@ public class DictionaryCreateDto {
 
     @NotNull
     @NotEmpty
-    private final String userId;
+    private final Long userId;
 
-    public static DictionaryCreateDto of(final String name, final String language, final String userId) {
+    public static DictionaryCreateDto of(final String name, final String language, final Long userId) {
         return new DictionaryCreateDto(name, language, userId);
     }
 }
