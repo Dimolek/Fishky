@@ -6,25 +6,22 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
 @Getter
-public class TranslationCreateDto {
+public final class TranslationsCreateRequestDto {
 
     @NotNull
     @NotEmpty
-    private final String word;
-
-    @NotNull
-    @NotEmpty
-    private final String translated;
+    List<TranslationCreateRequestDto> translations;
 
     @NotNull
     @NotEmpty
     private final Long dictionaryId;
 
-    public static TranslationCreateDto of(final String word, final String translated, final Long dictionaryId) {
-        return new TranslationCreateDto(word, translated, dictionaryId);
+    public static TranslationsCreateRequestDto of(final List<TranslationCreateRequestDto> translations, final Long dictionaryId) {
+        return new TranslationsCreateRequestDto(translations, dictionaryId);
     }
 }

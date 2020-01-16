@@ -1,10 +1,9 @@
 package com.fishky.controller;
 
-import com.fishky.dto.abstracts.IdDto;
-import com.fishky.dto.translation.TranslationCreateDto;
+import com.fishky.dto.IdDto;
+import com.fishky.dto.translation.TranslationCreateRequestDto;
 import com.fishky.dto.translation.TranslationDto;
-import com.fishky.dto.translation.TranslationsCreateDto;
-import com.fishky.properties.ConstURLMapping;
+import com.fishky.dto.translation.TranslationsCreateRequestDto;
 import com.fishky.service.TranslationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,25 +13,31 @@ import java.util.List;
 @RestController
 public class TranslationController {
 
+    private static final String ADD_TRANSLATION = "/addTranslation";
+    private static final String ADD_TRANSLATION_COLLECTION = "/addTranslationCollection";
+    private static final String FIND_TRANSLATION = "/findTranslationById";
+    private static final String MODIFY_TRANSLATION = "/modifyTranslation";
+    private static final String DELETE_TRANSLATION = "/deleteTranslationById";
+
     @Autowired
     private TranslationService service;
 
-    @PostMapping(value = ConstURLMapping.ADD_TRANSLATION)
-    public IdDto add(@RequestBody final TranslationCreateDto translation) {
+    @PostMapping(value = ADD_TRANSLATION)
+    public IdDto add(@RequestBody final TranslationCreateRequestDto translation) {
         return service.add(translation);
     }
 
-    @PostMapping(value = ConstURLMapping.ADD_TRANSLATION_COLLECTION)
-    public List<IdDto> addMany(@RequestBody final TranslationsCreateDto translations) {
+    @PostMapping(value = ADD_TRANSLATION_COLLECTION)
+    public List<IdDto> addMany(@RequestBody final TranslationsCreateRequestDto translations) {
         return service.addMany(translations);
     }
 
-    @PutMapping(value = ConstURLMapping.MODIFY_TRANSLATION)
+    @PutMapping(value = MODIFY_TRANSLATION)
     public TranslationDto modify(@RequestBody final TranslationDto translation) {
         return service.modify(translation);
     }
 
-    @DeleteMapping(value = ConstURLMapping.DELETE_TRANSLATION)
+    @DeleteMapping(value = DELETE_TRANSLATION)
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
     }

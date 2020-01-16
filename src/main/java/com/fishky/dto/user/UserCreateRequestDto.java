@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
 @Getter
-public class UserCreateDto {
+public final class UserCreateRequestDto {
 
     @NotNull
     @NotEmpty
@@ -20,7 +20,7 @@ public class UserCreateDto {
     @NotEmpty
     private final String password;
 
-    public static UserCreateDto of(final String username, final String password) {
-        return new UserCreateDto(username, password);
+    public static UserCreateRequestDto of(final String username, final String password) {
+        return new UserCreateRequestDto(username, password);
     }
 }

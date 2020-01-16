@@ -1,13 +1,19 @@
 package com.fishky.dto.translation;
 
-import com.fishky.dto.abstracts.AbstractDto;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class TranslationDto extends AbstractDto {
+public final class TranslationDto {
+
+    @NotNull
+    @NotEmpty
+    private Long id;
 
     @NotNull
     @NotEmpty
@@ -20,13 +26,6 @@ public class TranslationDto extends AbstractDto {
     @NotNull
     @NotEmpty
     private final Long dictionaryId;
-
-    private TranslationDto(final Long id, final String word, final String translated, final Long dictionaryId) {
-        super(id);
-        this.word = word;
-        this.translated = translated;
-        this.dictionaryId = dictionaryId;
-    }
 
     public static TranslationDto of(final Long id, final String word, final String translated, final Long dictionaryId) {
         return new TranslationDto(id, word, translated, dictionaryId);

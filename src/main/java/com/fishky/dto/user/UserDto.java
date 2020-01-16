@@ -1,13 +1,19 @@
 package com.fishky.dto.user;
 
-import com.fishky.dto.abstracts.AbstractDto;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class UserDto extends AbstractDto {
+public final class UserDto {
+
+    @NotNull
+    @NotEmpty
+    private Long id;
 
     @NotNull
     @NotEmpty
@@ -16,12 +22,6 @@ public class UserDto extends AbstractDto {
     @NotNull
     @NotEmpty
     private final String password;
-
-    private UserDto(final Long id, final String username, final String password) {
-        super(id);
-        this.username = username;
-        this.password = password;
-    }
 
     public static UserDto of(final Long id, final String username, final String password) {
         return new UserDto(id, username, password);

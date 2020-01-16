@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
 @Getter
-public class DictionaryCreateDto {
+public final class DictionaryCreateRequestDto {
 
     @NotNull
     @NotEmpty
@@ -24,7 +24,7 @@ public class DictionaryCreateDto {
     @NotEmpty
     private final Long userId;
 
-    public static DictionaryCreateDto of(final String name, final String language, final Long userId) {
-        return new DictionaryCreateDto(name, language, userId);
+    public static DictionaryCreateRequestDto of(final String name, final String language, final Long userId) {
+        return new DictionaryCreateRequestDto(name, language, userId);
     }
 }
