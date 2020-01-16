@@ -26,14 +26,14 @@ public class UserService {
                 userRepository.read(id.getId()));
     }
 
-    public UserDto modify(UserDto user) {
+    public UserDto modify(final UserDto user) {
         return UserMapper.toDto(
                 userRepository.modify(
                         UserMapper.fromDto(user,
                                 userRepository.read(user.getId()).getCreateTime().toLocalDateTime())));
     }
 
-    public Boolean delete(IdDto id) {
+    public Boolean delete(final IdDto id) {
         //Also, delete all dependent dictionaries
         return userRepository.delete(id.getId());
     }
