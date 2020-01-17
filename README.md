@@ -19,5 +19,5 @@ An Internet application to help you train your language skills by imitating flas
 - [ ] any form of GUI
 - [ ] user validation and basic security
 - [ ] advanced use of Spring Security
-- [ ] cover app with unit tests
+- [x] cover app with unit tests
 - [ ] integrate with Google Translate API
