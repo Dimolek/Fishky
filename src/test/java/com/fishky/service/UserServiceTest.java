@@ -30,23 +30,28 @@ class UserServiceTest {
 
     @Test
     void add_whenCorrectUserContentIsProvided_thenNewIdIsReturned() {
-
+        //given
         final Long id = 39L;
         final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", "qwerty");
 
         when(repository.save(any())).thenReturn(id);
 
+        //when
         IdDto idDto = service.add(userDto);
+
+        //then
         assertEquals(39L, idDto.getId());
     }
 
     @Test
     public void add_whenIncorrectUserContentIsProvided_thenNullPointerExceptionIsThrown() {
-
+        //given
         final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", null);
 
+        //when
         when(repository.save(any())).thenThrow(new NullPointerException());
 
+        //then
         assertThrows(NullPointerException.class, () -> service.add(userDto));
 
         // only mock is tested, need to implement validation methods
@@ -54,13 +59,16 @@ class UserServiceTest {
 
     @Test
     public void read_whenExistingUserIdIsProvided_thenRetrievedUserContentIsCorrect() {
-
+        //given
         final IdDto dto = IdDto.of(18L);
         final UserEntity userEntity = new UserEntity(18L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
 
         when(repository.read(dto.getId())).thenReturn(userEntity);
 
+        //when
         UserDto resultUser = service.read(dto);
+
+        //then
         assertAll("Should return correct user data",
                 () -> assertEquals(18L, resultUser.getId()),
                 () -> assertEquals("TestUser", resultUser.getUsername()),
@@ -70,28 +78,33 @@ class UserServiceTest {
 
     @Test
     public void read_whenUserIdDoesNotExist_thenNullPointerExceptionIsThrown() {
-
+        //given
         final IdDto dto = IdDto.of(62000L);
 
+        //when
         when(repository.read(dto.getId())).thenReturn(null);
 
+        //then
         assertThrows(NullPointerException.class, () -> service.read(dto));
     }
 
     @Test
     void modify_whenCorrectUserContentIsProvided_thenModifiedUserIsReturned() {
-
+        //given
         final UserDto userDto = UserDto.of(39L,"User1", "qwerty");
         final UserEntity userEntity = new UserEntity(39L, "User1", "qwerty", Timestamp.valueOf(LocalDateTime.now()));
 
         when(repository.modify(any())).thenReturn(userEntity);
         when(repository.read(userDto.getId())).thenReturn(userEntity);
 
+        //when
         UserDto resultUser = service.modify(userDto);
-        assertAll("Should return correct user data",
+
+        //then
+        assertAll("Should return correct modified user data",
                 () -> assertEquals(39L, resultUser.getId()),
-                () -> assertEquals("TestUser", resultUser.getUsername()),
-                () -> assertEquals("TestPassword", resultUser.getPassword())
+                () -> assertEquals("User1", resultUser.getUsername()),
+                () -> assertEquals("qwerty", resultUser.getPassword())
         );
     }
 
