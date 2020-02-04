@@ -10,13 +10,13 @@ An Internet application to help you train your language skills by imitating flas
   * [Lombok](https://projectlombok.org/) - External library to cleanup the code
   * [JUnit 5](https://junit.org/junit5/), [Mockito](https://site.mockito.org/) - Testing framework
 * [MySql](https://www.mysql.com/) - Database
-* [ ] _[Electron](https://electronjs.org/) - Frontend (TODO)
+* [React](https://reactjs.org/) - Frontend
 
 
 
 ## TODO:
 - [x] adding, editing and removing users and flashcards
-- [ ] any form of GUI
+- [x] any form of GUI
 - [ ] user validation and basic security
 - [ ] advanced use of Spring Security
 - [x] cover app with unit tests
