@@ -39,7 +39,6 @@ public class DictionaryMapper {
                                 .map(TranslationMapper::toDto)
                                 .collect(Collectors.toSet()))
                         .orElse(null));
-
     }
 
     public static List<DictionaryDto> toDto(List<DictionaryEntity> dictionaries) {
