@@ -15,7 +15,7 @@ public final class TranslationsCreateRequestDto {
 
     @NotNull
     @NotEmpty
-    private List<TranslationCreateRequestDto> translations;
+    List<TranslationCreateRequestDto> translations;
 
     @NotNull
     @NotEmpty
