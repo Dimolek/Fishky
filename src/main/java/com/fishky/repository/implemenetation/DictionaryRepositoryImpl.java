@@ -24,12 +24,12 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
     private DictionaryOrmRepository ormRepository;
 
     @Override
-    public Long save(final DictionaryEntity dictionary) {
-        return ormRepository.saveAndFlush(dictionary).getIdDictionary();
+    public DictionaryEntity save(final DictionaryEntity dictionary) {
+        return ormRepository.saveAndFlush(dictionary);
     }
 
     @Override
-    public DictionaryEntity read(final Long id) {
+    public DictionaryEntity readWithFetch(final Long id) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DictionaryEntity> query = cb.createQuery(DictionaryEntity.class);
@@ -38,6 +38,11 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
         query.select(dictionary).where(cb.equal(dictionary.get("idDictionary"), id));
         TypedQuery<DictionaryEntity> typedQuery = entityManager.createQuery(query);
         return typedQuery.getSingleResult();
+    }
+
+    @Override
+    public DictionaryEntity read(Long id) {
+        return ormRepository.findById(id).orElse(null);
     }
 
     @Override

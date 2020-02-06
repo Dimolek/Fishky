@@ -41,21 +41,25 @@ class TranslationServiceTest {
 
 
     @Test
-    void add_whenCorrectTranslationContentIsProvided_thenNewIdIsReturned() {
+    void add_whenCorrectTranslationContentIsProvided_thenNewTranslationDtoIsReturned() {
         //given
-        final Long id = 20L;
-        final TranslationCreateRequestDto translationDto = TranslationCreateRequestDto.of("car", "samochod", 1L);
+        final TranslationCreateRequestDto translationCreateDto = TranslationCreateRequestDto.of("car", "samochod", 1L);
         final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(1L, "Unit2", "German", userEntity);
+        final TranslationEntity translationEntity = new TranslationEntity(14L, "samochód", "car", dictionaryEntity);
 
-        when(translationRepository.save(any())).thenReturn(id);
-        when(dictionaryRepository.read(translationDto.getDictionaryId())).thenReturn(dictionaryEntity);
+        when(translationRepository.save(any())).thenReturn(translationEntity);
+        when(dictionaryRepository.readWithFetch(translationCreateDto.getDictionaryId())).thenReturn(dictionaryEntity);
 
         //when
-        IdDto idDto = translationService.add(translationDto);
+        TranslationDto translationDto = translationService.add(translationCreateDto);
 
         //then
-        assertEquals(20L, idDto.getId());
+        assertAll("Should return correct translation data",
+                () -> assertEquals(14L, translationDto.getId()),
+                () -> assertEquals("samochód", translationDto.getWord()),
+                () -> assertEquals("car", translationDto.getTranslated())
+        );
     }
 
     @Test
@@ -100,7 +104,7 @@ class TranslationServiceTest {
         final TranslationEntity translationEntity = new TranslationEntity(15L, "car", "samochod", dictionaryEntity);
 
         when(translationRepository.modify(any())).thenReturn(translationEntity);
-        when(dictionaryRepository.read(translationDto.getDictionaryId())).thenReturn(dictionaryEntity);
+        when(dictionaryRepository.readWithFetch(translationDto.getDictionaryId())).thenReturn(dictionaryEntity);
 
         //when
         TranslationDto resultTranslation = translationService.modify(translationDto);

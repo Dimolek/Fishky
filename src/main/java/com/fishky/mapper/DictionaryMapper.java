@@ -6,6 +6,7 @@ import com.fishky.dto.dictionary.DictionaryResponseDto;
 import com.fishky.model.DictionaryEntity;
 import com.fishky.model.UserEntity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class DictionaryMapper {
                 user);
     }
 
+    @SuppressWarnings("unchecked")
     public static DictionaryResponseDto toDto(final DictionaryEntity dictionary) {
         return DictionaryResponseDto.of(
                 dictionary.getIdDictionary(),
@@ -38,7 +40,7 @@ public class DictionaryMapper {
                                 .stream()
                                 .map(TranslationMapper::toDto)
                                 .collect(Collectors.toSet()))
-                        .orElse(null));
+                        .orElse(Collections.EMPTY_SET));
     }
 
     public static List<DictionaryDto> toDto(List<DictionaryEntity> dictionaries) {

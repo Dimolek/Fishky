@@ -25,7 +25,7 @@ public class DictionaryController {
     private DictionaryService service;
 
     @PostMapping(value = ADD_DICTIONARY)
-    public IdDto add(@RequestBody final DictionaryCreateRequestDto dictionary) {
+    public DictionaryResponseDto add(@RequestBody final DictionaryCreateRequestDto dictionary) {
         return service.add(dictionary);
     }
 

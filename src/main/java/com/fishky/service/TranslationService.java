@@ -24,17 +24,18 @@ public class TranslationService {
     @Autowired
     private DictionaryRepository dictionaryRepository;
 
-    public IdDto add(TranslationCreateRequestDto translation) {
-        return IdDto.of(
+
+    public TranslationDto add(TranslationCreateRequestDto translation) {
+        return TranslationMapper.toDto(
                         translationRepository.save(
                                 TranslationMapper.fromDto(translation,
-                                        dictionaryRepository.read(translation.getDictionaryId()))));
+                                        dictionaryRepository.readWithFetch(translation.getDictionaryId()))));
     }
 
     public List<IdDto> addMany(TranslationsCreateRequestDto translations) {
         return translationRepository
                 .saveMany(TranslationMapper.fromDto(translations,
-                        dictionaryRepository.read(translations.getDictionaryId())))
+                        dictionaryRepository.readWithFetch(translations.getDictionaryId())))
                 .stream()
                 .map(IdDto::of)
                 .collect(Collectors.toList());
@@ -47,7 +48,7 @@ public class TranslationService {
     public TranslationDto modify(TranslationDto translation) {
         return TranslationMapper.toDto(
                 translationRepository.modify(
-                        TranslationMapper.fromDto(translation, dictionaryRepository.read(translation.getDictionaryId()))));
+                        TranslationMapper.fromDto(translation, dictionaryRepository.readWithFetch(translation.getDictionaryId()))));
     }
 
     public Boolean delete(IdDto id) {

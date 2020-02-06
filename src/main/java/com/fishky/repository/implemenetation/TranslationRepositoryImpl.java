@@ -16,9 +16,9 @@ public class TranslationRepositoryImpl implements TranslationRepository {
     private TranslationOrmRepository ormRepository;
 
     @Override
-    public Long save(final TranslationEntity translation) {
+    public TranslationEntity save(final TranslationEntity translation) {
 
-        return ormRepository.saveAndFlush(translation).getIdTranslation();
+        return ormRepository.saveAndFlush(translation);
     }
 
     @Override

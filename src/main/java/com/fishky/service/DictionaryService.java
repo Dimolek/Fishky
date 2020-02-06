@@ -23,15 +23,16 @@ public class DictionaryService {
     @Autowired
     private UserRepository userRepository;
 
-    public IdDto add(final DictionaryCreateRequestDto dictionary) {
-        return IdDto.of(
+
+    public DictionaryResponseDto add(final DictionaryCreateRequestDto dictionary) {
+        return DictionaryMapper.toDto(
                         dictionaryRepository.save(
                                 DictionaryMapper.fromDto(dictionary, userRepository.read(dictionary.getUserId()))));
     }
 
     public DictionaryResponseDto read(final IdDto id) {
         return DictionaryMapper.toDto(
-                dictionaryRepository.read(id.getId()));
+                dictionaryRepository.readWithFetch(id.getId()));
     }
 
     public List<DictionaryDto> readUsersDictionaries(IdDto userId) {

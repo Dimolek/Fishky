@@ -65,16 +65,16 @@ public class DictionaryEntity {
         this.translations = translations;
     }
 
-    public DictionaryEntity(long idDictionary, String language, String name, UserEntity user) {
+    public DictionaryEntity(long idDictionary, String name, String language, UserEntity user) {
         this.idDictionary = idDictionary;
-        this.language = language;
         this.name = name;
+        this.language = language;
         this.user = user;
     }
 
-    public DictionaryEntity(String language, String name, UserEntity user) {
-        this.language = language;
+    public DictionaryEntity(String name, String language, UserEntity user) {
         this.name = name;
+        this.language = language;
         this.user = user;
     }
 

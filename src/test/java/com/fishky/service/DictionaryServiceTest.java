@@ -37,19 +37,23 @@ class DictionaryServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void add_whenCorrectDictionaryContentIsProvided_thenNewIdIsReturned() {
+    void add_whenCorrectDictionaryContentIsProvided_thenNewDictionaryResponseDtoIsReturned() {
         //given
-        final Long id = 39L;
         final DictionaryCreateRequestDto dictionaryDto = DictionaryCreateRequestDto.of("Unit2", "German", 12L);
         final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
+        final DictionaryEntity entity = new DictionaryEntity(16L,"German", "Unit2", userEntity);
 
-        when(dictionaryRepository.save(any())).thenReturn(id);
+        when(dictionaryRepository.save(any())).thenReturn(entity);
         when(userRepository.read(dictionaryDto.getUserId())).thenReturn(userEntity);
 
         //when
-        IdDto idDto = dictionaryService.add(dictionaryDto);
+        DictionaryResponseDto dictionaryResponseDto = dictionaryService.add(dictionaryDto);
         //then
-        assertEquals(39L, idDto.getId());
+        assertAll("Should return correct dictionary data",
+                () -> assertEquals(16L, dictionaryResponseDto.getId()),
+                () -> assertEquals("Unit2", dictionaryResponseDto.getName()),
+                () -> assertEquals("German", dictionaryResponseDto.getLanguage())
+        );
     }
 
     @Test
@@ -76,7 +80,7 @@ class DictionaryServiceTest {
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(
                 70L, "Mandarin", "Unit4", userEntity);
 
-        Mockito.when(dictionaryRepository.read(dto.getId())).thenReturn(dictionaryEntity);
+        Mockito.when(dictionaryRepository.readWithFetch(dto.getId())).thenReturn(dictionaryEntity);
 
         //when
         DictionaryResponseDto resultDictionary = dictionaryService.read(dto);
@@ -95,7 +99,7 @@ class DictionaryServiceTest {
         final IdDto dto = IdDto.of(62000L);
 
         //when
-        when(dictionaryRepository.read(dto.getId())).thenReturn(null);
+        when(dictionaryRepository.readWithFetch(dto.getId())).thenReturn(null);
 
         //then
         assertThrows(NullPointerException.class, () -> dictionaryService.read(dto));

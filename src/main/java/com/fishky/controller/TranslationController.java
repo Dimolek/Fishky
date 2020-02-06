@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class TranslationController {
 
     private static final String ADD_TRANSLATION = "/addTranslation";
@@ -23,7 +24,7 @@ public class TranslationController {
     private TranslationService service;
 
     @PostMapping(value = ADD_TRANSLATION)
-    public IdDto add(@RequestBody final TranslationCreateRequestDto translation) {
+    public TranslationDto add(@RequestBody final TranslationCreateRequestDto translation) {
         return service.add(translation);
     }
 
@@ -37,7 +38,7 @@ public class TranslationController {
         return service.modify(translation);
     }
 
-    @DeleteMapping(value = DELETE_TRANSLATION)
+    @PostMapping(value = DELETE_TRANSLATION)
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
     }
