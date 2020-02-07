@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -28,21 +29,18 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
         return ormRepository.saveAndFlush(dictionary);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public DictionaryEntity readWithFetch(final Long id) {
+    public DictionaryEntity read(final Long id) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DictionaryEntity> query = cb.createQuery(DictionaryEntity.class);
         Root<DictionaryEntity> dictionary = query.from(DictionaryEntity.class);
-        dictionary.fetch("translations");
+        dictionary.fetch("translations", JoinType.LEFT);
         query.select(dictionary).where(cb.equal(dictionary.get("idDictionary"), id));
-        TypedQuery<DictionaryEntity> typedQuery = entityManager.createQuery(query);
-        return typedQuery.getSingleResult();
-    }
 
-    @Override
-    public DictionaryEntity read(Long id) {
-        return ormRepository.findById(id).orElse(null);
+        TypedQuery<DictionaryEntity> q = entityManager.createQuery(query);
+        return q.getSingleResult();
     }
 
     @Override

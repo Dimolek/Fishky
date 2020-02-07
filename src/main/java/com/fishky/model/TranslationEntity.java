@@ -44,7 +44,7 @@ public class TranslationEntity {
         this.translated = translated;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dictionary_id_dictionary", nullable = false)
     public DictionaryEntity getDictionary() {
         return dictionary;

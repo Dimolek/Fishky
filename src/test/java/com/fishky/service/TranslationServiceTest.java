@@ -49,7 +49,7 @@ class TranslationServiceTest {
         final TranslationEntity translationEntity = new TranslationEntity(14L, "samochód", "car", dictionaryEntity);
 
         when(translationRepository.save(any())).thenReturn(translationEntity);
-        when(dictionaryRepository.readWithFetch(translationCreateDto.getDictionaryId())).thenReturn(dictionaryEntity);
+        when(dictionaryRepository.read(translationCreateDto.getDictionaryId())).thenReturn(dictionaryEntity);
 
         //when
         TranslationDto translationDto = translationService.add(translationCreateDto);
@@ -104,7 +104,7 @@ class TranslationServiceTest {
         final TranslationEntity translationEntity = new TranslationEntity(15L, "car", "samochod", dictionaryEntity);
 
         when(translationRepository.modify(any())).thenReturn(translationEntity);
-        when(dictionaryRepository.readWithFetch(translationDto.getDictionaryId())).thenReturn(dictionaryEntity);
+        when(dictionaryRepository.read(translationDto.getDictionaryId())).thenReturn(dictionaryEntity);
 
         //when
         TranslationDto resultTranslation = translationService.modify(translationDto);

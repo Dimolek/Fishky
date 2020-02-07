@@ -32,7 +32,7 @@ public class DictionaryService {
 
     public DictionaryResponseDto read(final IdDto id) {
         return DictionaryMapper.toDto(
-                dictionaryRepository.readWithFetch(id.getId()));
+                dictionaryRepository.read(id.getId()));
     }
 
     public List<DictionaryDto> readUsersDictionaries(IdDto userId) {

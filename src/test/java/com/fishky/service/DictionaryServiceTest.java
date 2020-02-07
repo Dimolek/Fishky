@@ -80,7 +80,7 @@ class DictionaryServiceTest {
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(
                 70L, "Mandarin", "Unit4", userEntity);
 
-        Mockito.when(dictionaryRepository.readWithFetch(dto.getId())).thenReturn(dictionaryEntity);
+        Mockito.when(dictionaryRepository.read(dto.getId())).thenReturn(dictionaryEntity);
 
         //when
         DictionaryResponseDto resultDictionary = dictionaryService.read(dto);
@@ -99,7 +99,7 @@ class DictionaryServiceTest {
         final IdDto dto = IdDto.of(62000L);
 
         //when
-        when(dictionaryRepository.readWithFetch(dto.getId())).thenReturn(null);
+        when(dictionaryRepository.read(dto.getId())).thenReturn(null);
 
         //then
         assertThrows(NullPointerException.class, () -> dictionaryService.read(dto));

@@ -44,7 +44,7 @@ public class DictionaryController {
         return service.modify(dictionary);
     }
 
-    @DeleteMapping(value = DELETE_DICTIONARY)
+    @PostMapping(value = DELETE_DICTIONARY)
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
     }
