@@ -10,7 +10,7 @@ An Internet application to help you train your language skills by imitating flas
   * [Lombok](https://projectlombok.org/) - External library to cleanup the code
   * [JUnit 5](https://junit.org/junit5/), [Mockito](https://site.mockito.org/) - Testing framework
 * [MySql](https://www.mysql.com/) - Database
-* [React](https://reactjs.org/) - Frontend
+* [React](https://reactjs.org/) - Frontend *(currently on another branch; to be moved as submodule)*
 
 
 
