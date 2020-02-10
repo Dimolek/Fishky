@@ -1,5 +1,5 @@
 # Fishky
-An Internet application to help you train your language skills by imitating flashcards (Polish: fiszki). Main purpose of this project is to improve programming abilities but also to provide some useful functionality. Currently in very early development phase.
+An Internet application to help you train your language skills by imitating flashcards (Polish: fiszki). Main purpose of this project is to improve programming abilities but also to provide some useful functionality. Currently in early development phase. It is being created by [@Dimolek](https://github.com/Dimolek/) and [@MateuszSochacki](https://github.com/MateuszSochacki).
 
 ## Built with
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE
@@ -10,7 +10,7 @@ An Internet application to help you train your language skills by imitating flas
   * [Lombok](https://projectlombok.org/) - External library to cleanup the code
   * [JUnit 5](https://junit.org/junit5/), [Mockito](https://site.mockito.org/) - Testing framework
 * [MySql](https://www.mysql.com/) - Database
-* [React](https://reactjs.org/) - Frontend
+* [React](https://reactjs.org/) - Frontend *(currently on another branch; to be moved as submodule)*
 
 
 
