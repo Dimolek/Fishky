@@ -1,5 +1,6 @@
 package com.fishky.mapper;
 
+import com.fishky.config.AccountRoles;
 import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.model.UserEntity;
@@ -13,7 +14,8 @@ public class UserMapper {
         return new UserEntity(
                 user.getUsername(),
                 user.getPassword(),
-                Timestamp.valueOf(LocalDateTime.now()));
+                Timestamp.valueOf(LocalDateTime.now()),
+                AccountRoles.USER);
     }
 
     public static UserEntity fromDto(UserDto user, LocalDateTime creationTime) {
@@ -21,7 +23,8 @@ public class UserMapper {
                 user.getId(),
                 user.getUsername(),
                 user.getPassword(),
-                Timestamp.valueOf(creationTime));
+                Timestamp.valueOf(creationTime),
+                AccountRoles.USER);
     }
 
     public static UserDto toDto(final UserEntity user) {

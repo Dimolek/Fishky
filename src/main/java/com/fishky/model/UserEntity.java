@@ -14,6 +14,7 @@ public class UserEntity {
     private String username;
     private String password;
     private Timestamp createTime;
+    private String role;
     private Set<DictionaryEntity> dictionaries;
 
     @Id
@@ -57,6 +58,16 @@ public class UserEntity {
         this.createTime = createTime;
     }
 
+    @Basic
+    @Column(name = "role", nullable = false)
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public Set<DictionaryEntity> getDictionaries() {
         return dictionaries;
@@ -66,17 +77,19 @@ public class UserEntity {
         this.dictionaries = dictionaries;
     }
 
-    public UserEntity(long idUser, String username, String password, Timestamp createTime) {
+    public UserEntity(long idUser, String username, String password, Timestamp createTime, String role) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.createTime = createTime;
+        this.role = role;
     }
 
-    public UserEntity(String username, String password, Timestamp createTime) {
+    public UserEntity(String username, String password, Timestamp createTime, String role) {
         this.username = username;
         this.password = password;
         this.createTime = createTime;
+        this.role = role;
     }
 
     @Override
@@ -90,7 +103,7 @@ public class UserEntity {
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
-
+        if (role != null ? !role.equals(that.role) : that.role != null) return false;
         return true;
     }
 
@@ -100,6 +113,7 @@ public class UserEntity {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
 }

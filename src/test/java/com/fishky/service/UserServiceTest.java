@@ -1,9 +1,11 @@
 package com.fishky.service;
 
+import com.fishky.config.AccountRoles;
 import com.fishky.dto.IdDto;
 import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.model.UserEntity;
+import com.fishky.policy.UserPolicy;
 import com.fishky.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 
@@ -26,15 +29,19 @@ class UserServiceTest {
     private UserService service;
 
     @Mock
+    private UserPolicy userPolicy;
+
+    @Mock
     private UserRepository repository;
 
     @Test
     void add_whenCorrectUserContentIsProvided_thenNewIdIsReturned() {
         //given
         final Long id = 39L;
-        final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", "qwerty");
+        final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", "qwerty", "qwerty");
 
         when(repository.save(any())).thenReturn(id);
+        doNothing().when(userPolicy).userExists(any());
 
         //when
         IdDto idDto = service.add(userDto);
@@ -43,10 +50,10 @@ class UserServiceTest {
         assertEquals(39L, idDto.getId());
     }
 
-    @Test
+/*    @Test
     public void add_whenIncorrectUserContentIsProvided_thenNullPointerExceptionIsThrown() {
         //given
-        final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", null);
+        final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", null, null);
 
         //when
         when(repository.save(any())).thenThrow(new NullPointerException());
@@ -55,13 +62,13 @@ class UserServiceTest {
         assertThrows(NullPointerException.class, () -> service.add(userDto));
 
         // only mock is tested, need to implement validation methods
-    }
+    }*/
 
     @Test
     public void read_whenExistingUserIdIsProvided_thenRetrievedUserContentIsCorrect() {
         //given
         final IdDto dto = IdDto.of(18L);
-        final UserEntity userEntity = new UserEntity(18L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
+        final UserEntity userEntity = new UserEntity(18L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
 
         when(repository.read(dto.getId())).thenReturn(userEntity);
 
@@ -92,7 +99,7 @@ class UserServiceTest {
     void modify_whenCorrectUserContentIsProvided_thenModifiedUserIsReturned() {
         //given
         final UserDto userDto = UserDto.of(39L,"User1", "qwerty");
-        final UserEntity userEntity = new UserEntity(39L, "User1", "qwerty", Timestamp.valueOf(LocalDateTime.now()));
+        final UserEntity userEntity = new UserEntity(39L, "User1", "qwerty", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
 
         when(repository.modify(any())).thenReturn(userEntity);
         when(repository.read(userDto.getId())).thenReturn(userEntity);

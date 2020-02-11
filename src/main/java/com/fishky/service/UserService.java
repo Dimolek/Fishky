@@ -4,6 +4,7 @@ import com.fishky.dto.IdDto;
 import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.mapper.UserMapper;
+import com.fishky.policy.UserPolicy;
 import com.fishky.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserPolicy userPolicy;
+
     public IdDto add(final UserCreateRequestDto user) {
-        return IdDto.of(userRepository.save(
-                                UserMapper.fromDto(user)));
+        userPolicy.userExists(user.getUsername());
+        return IdDto.of(userRepository.save(UserMapper.fromDto(user)));
+
     }
 
     public UserDto read(final IdDto id) {

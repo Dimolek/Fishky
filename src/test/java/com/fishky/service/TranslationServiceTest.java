@@ -1,5 +1,6 @@
 package com.fishky.service;
 
+import com.fishky.config.AccountRoles;
 import com.fishky.dto.IdDto;
 import com.fishky.dto.translation.TranslationCreateRequestDto;
 import com.fishky.dto.translation.TranslationDto;
@@ -44,7 +45,7 @@ class TranslationServiceTest {
     void add_whenCorrectTranslationContentIsProvided_thenNewTranslationDtoIsReturned() {
         //given
         final TranslationCreateRequestDto translationCreateDto = TranslationCreateRequestDto.of("car", "samochod", 1L);
-        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
+        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(1L, "Unit2", "German", userEntity);
         final TranslationEntity translationEntity = new TranslationEntity(14L, "samochód", "car", dictionaryEntity);
 
@@ -98,7 +99,7 @@ class TranslationServiceTest {
     void modify_whenCorrectTranslationContentIsProvided_thenModifiedTranslationIsReturned() {
         //given
         final TranslationDto translationDto = TranslationDto.of(15L, "car", "samochod", 1L);
-        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
+        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(39L, "English", "Unit21", userEntity);
 
         final TranslationEntity translationEntity = new TranslationEntity(15L, "car", "samochod", dictionaryEntity);

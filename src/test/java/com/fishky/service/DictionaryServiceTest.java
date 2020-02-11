@@ -1,5 +1,6 @@
 package com.fishky.service;
 
+import com.fishky.config.AccountRoles;
 import com.fishky.dto.IdDto;
 import com.fishky.dto.dictionary.DictionaryCreateRequestDto;
 import com.fishky.dto.dictionary.DictionaryDto;
@@ -40,8 +41,8 @@ class DictionaryServiceTest {
     void add_whenCorrectDictionaryContentIsProvided_thenNewDictionaryResponseDtoIsReturned() {
         //given
         final DictionaryCreateRequestDto dictionaryDto = DictionaryCreateRequestDto.of("Unit2", "German", 12L);
-        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
-        final DictionaryEntity entity = new DictionaryEntity(16L,"German", "Unit2", userEntity);
+        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
+        final DictionaryEntity entity = new DictionaryEntity(16L,"Unit2", "German", userEntity);
 
         when(dictionaryRepository.save(any())).thenReturn(entity);
         when(userRepository.read(dictionaryDto.getUserId())).thenReturn(userEntity);
@@ -76,9 +77,9 @@ class DictionaryServiceTest {
         final IdDto dto = IdDto.of(70L);
 
         final UserEntity userEntity = new UserEntity(
-                18L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
+                18L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(
-                70L, "Mandarin", "Unit4", userEntity);
+                70L, "Unit4", "Mandarin", userEntity);
 
         Mockito.when(dictionaryRepository.read(dto.getId())).thenReturn(dictionaryEntity);
 
@@ -109,12 +110,12 @@ class DictionaryServiceTest {
     void readUsersDictionaries() {
         //given
         final IdDto dto = IdDto.of(1L);
-        final UserEntity userEntity = new UserEntity(1L, "User123", "StrongPassword123", Timestamp.valueOf(LocalDateTime.now()));
+        final UserEntity userEntity = new UserEntity(1L, "User123", "StrongPassword123", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final List<DictionaryEntity> dictionaryEntityList = new ArrayList<>();
 
-        dictionaryEntityList.add(new DictionaryEntity(1L, "English", "Unit 1", userEntity));
-        dictionaryEntityList.add(new DictionaryEntity(2L, "Deutsch", "Kapitel zwei", userEntity));
-        dictionaryEntityList.add(new DictionaryEntity(3L, "Deutsch", "Kapitel drei", userEntity));
+        dictionaryEntityList.add(new DictionaryEntity(1L, "Unit 1", "English", userEntity));
+        dictionaryEntityList.add(new DictionaryEntity(2L, "Kapitel zwei", "Deutsch", userEntity));
+        dictionaryEntityList.add(new DictionaryEntity(3L, "Kapitel drei", "Deutsch", userEntity));
         when(dictionaryRepository.readUsersDictionaries(dto.getId())).thenReturn(dictionaryEntityList);
 
         //when
@@ -139,8 +140,8 @@ class DictionaryServiceTest {
     void modify_whenCorrectDictionaryContentIsProvided_thenModifiedDictionaryIsReturned() {
         //given
         final DictionaryDto dictionaryDto = DictionaryDto.of(39L,"Unit21", "English", 12L);
-        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()));
-        final DictionaryEntity dictionaryEntity = new DictionaryEntity(39L, "English", "Unit21", userEntity);
+        final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
+        final DictionaryEntity dictionaryEntity = new DictionaryEntity(39L, "Unit21", "English", userEntity);
 
         when(dictionaryRepository.modify(any())).thenReturn(dictionaryEntity);
         when(userRepository.read(dictionaryDto.getUserId())).thenReturn(userEntity);

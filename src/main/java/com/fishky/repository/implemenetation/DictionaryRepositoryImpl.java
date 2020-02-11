@@ -32,7 +32,6 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
     @SuppressWarnings("unchecked")
     @Override
     public DictionaryEntity read(final Long id) {
-
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DictionaryEntity> query = cb.createQuery(DictionaryEntity.class);
         Root<DictionaryEntity> dictionary = query.from(DictionaryEntity.class);

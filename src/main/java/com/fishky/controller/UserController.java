@@ -7,6 +7,8 @@ import com.fishky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
@@ -21,7 +23,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping(value = ADD_USER)
-    public IdDto add(@RequestBody final UserCreateRequestDto user) {
+    public IdDto add(@RequestBody @Valid final UserCreateRequestDto user) {
         return service.add(user);
     }
 
