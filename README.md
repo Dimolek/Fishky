@@ -10,7 +10,7 @@ An Internet application to help you train your language skills by imitating flas
   * [Lombok](https://projectlombok.org/) - External library to cleanup the code
   * [JUnit 5](https://junit.org/junit5/), [Mockito](https://site.mockito.org/) - Testing framework
 * [MySql](https://www.mysql.com/) - Database
-* [React](https://reactjs.org/) - Frontend *(currently on another branch; to be moved as submodule)*
+* [React](https://reactjs.org/) - Frontend
 
 
 
@@ -19,5 +19,5 @@ An Internet application to help you train your language skills by imitating flas
 - [x] any form of GUI
 - [ ] user validation and basic security
 - [ ] advanced use of Spring Security
-- [x] cover app with unit tests
+- [ ] cover app with unit tests
 - [ ] integrate with Google Translate API
