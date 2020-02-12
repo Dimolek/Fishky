@@ -1,19 +1,17 @@
 package com.fishky.policy;
 
+import com.fishky.policy.validation.annotations.Policy;
 import com.fishky.repository.orm.UserOrmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+@Policy
 public class UserPolicy {
 
     @Autowired
     private UserOrmRepository ormRepository;
 
-    public void userExists(final String username)  {
-        if(ormRepository.existsByUsername(username))
-        {
+    public void userExists(final String username) {
+        if (ormRepository.existsByUsername(username))
             throw (new RuntimeException("User already exists"));
-        }
     }
 }
