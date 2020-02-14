@@ -1,6 +1,5 @@
 package com.fishky.service;
 
-import com.fishky.config.AccountRoles;
 import com.fishky.dto.IdDto;
 import com.fishky.dto.translation.TranslationCreateRequestDto;
 import com.fishky.dto.translation.TranslationDto;
@@ -10,6 +9,7 @@ import com.fishky.model.TranslationEntity;
 import com.fishky.model.UserEntity;
 import com.fishky.repository.DictionaryRepository;
 import com.fishky.repository.TranslationRepository;
+import com.fishky.security.config.AccountRoles;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

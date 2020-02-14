@@ -1,6 +1,5 @@
 package com.fishky.service;
 
-import com.fishky.config.AccountRoles;
 import com.fishky.dto.IdDto;
 import com.fishky.dto.dictionary.DictionaryCreateRequestDto;
 import com.fishky.dto.dictionary.DictionaryDto;
@@ -9,6 +8,7 @@ import com.fishky.model.DictionaryEntity;
 import com.fishky.model.UserEntity;
 import com.fishky.repository.DictionaryRepository;
 import com.fishky.repository.UserRepository;
+import com.fishky.security.config.AccountRoles;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,7 +45,7 @@ class DictionaryServiceTest {
         final DictionaryEntity entity = new DictionaryEntity(16L,"Unit2", "German", userEntity);
 
         when(dictionaryRepository.save(any())).thenReturn(entity);
-        when(userRepository.read(dictionaryDto.getUserId())).thenReturn(userEntity);
+        when(userRepository.readById(dictionaryDto.getUserId())).thenReturn(userEntity);
 
         //when
         DictionaryResponseDto dictionaryResponseDto = dictionaryService.add(dictionaryDto);
@@ -144,7 +144,7 @@ class DictionaryServiceTest {
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(39L, "Unit21", "English", userEntity);
 
         when(dictionaryRepository.modify(any())).thenReturn(dictionaryEntity);
-        when(userRepository.read(dictionaryDto.getUserId())).thenReturn(userEntity);
+        when(userRepository.readById(dictionaryDto.getUserId())).thenReturn(userEntity);
 
         //when
         DictionaryDto resultDictionary = dictionaryService.modify(dictionaryDto);

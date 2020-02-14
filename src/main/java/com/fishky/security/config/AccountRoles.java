@@ -1,4 +1,4 @@
-package com.fishky.config;
+package com.fishky.security.config;
 
 public final class AccountRoles {
     public static final String ADMIN = "ADMIN";

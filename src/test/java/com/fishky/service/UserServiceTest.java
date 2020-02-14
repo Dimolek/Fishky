@@ -1,12 +1,12 @@
 package com.fishky.service;
 
-import com.fishky.config.AccountRoles;
 import com.fishky.dto.IdDto;
 import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.model.UserEntity;
 import com.fishky.policy.UserPolicy;
 import com.fishky.repository.UserRepository;
+import com.fishky.security.config.AccountRoles;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -70,7 +70,7 @@ class UserServiceTest {
         final IdDto dto = IdDto.of(18L);
         final UserEntity userEntity = new UserEntity(18L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
 
-        when(repository.read(dto.getId())).thenReturn(userEntity);
+        when(repository.readById(dto.getId())).thenReturn(userEntity);
 
         //when
         UserDto resultUser = service.read(dto);
@@ -89,7 +89,7 @@ class UserServiceTest {
         final IdDto dto = IdDto.of(62000L);
 
         //when
-        when(repository.read(dto.getId())).thenReturn(null);
+        when(repository.readById(dto.getId())).thenReturn(null);
 
         //then
         assertThrows(NullPointerException.class, () -> service.read(dto));
@@ -102,7 +102,7 @@ class UserServiceTest {
         final UserEntity userEntity = new UserEntity(39L, "User1", "qwerty", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
 
         when(repository.modify(any())).thenReturn(userEntity);
-        when(repository.read(userDto.getId())).thenReturn(userEntity);
+        when(repository.readById(userDto.getId())).thenReturn(userEntity);
 
         //when
         UserDto resultUser = service.modify(userDto);

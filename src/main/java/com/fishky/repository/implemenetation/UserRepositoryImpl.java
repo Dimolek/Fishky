@@ -12,14 +12,20 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private UserOrmRepository ormRepository;
 
+
     @Override
     public Long save(final UserEntity user) {
         return ormRepository.saveAndFlush(user).getIdUser();
     }
 
     @Override
-    public UserEntity read(final Long id) {
+    public UserEntity readById(final Long id) {
         return ormRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public UserEntity readByUsername(final String s) {
+        return ormRepository.findByUsername(s).orElse(null);
     }
 
 

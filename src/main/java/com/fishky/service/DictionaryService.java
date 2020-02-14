@@ -27,24 +27,30 @@ public class DictionaryService {
     public DictionaryResponseDto add(final DictionaryCreateRequestDto dictionary) {
         return DictionaryMapper.toDto(
                         dictionaryRepository.save(
-                                DictionaryMapper.fromDto(dictionary, userRepository.read(dictionary.getUserId()))));
+                                DictionaryMapper.fromDto(dictionary, userRepository.readById(dictionary.getUserId()))
+                        )
+        );
     }
 
     public DictionaryResponseDto read(final IdDto id) {
         return DictionaryMapper.toDto(
-                dictionaryRepository.read(id.getId()));
+                dictionaryRepository.read(id.getId())
+        );
     }
 
     public List<DictionaryDto> readUsersDictionaries(IdDto userId) {
         return DictionaryMapper.toDto(
-                dictionaryRepository.readUsersDictionaries(userId.getId()));
+                dictionaryRepository.readUsersDictionaries(userId.getId())
+        );
     }
 
 
     public DictionaryResponseDto modify(final DictionaryDto dictionary) {
         return DictionaryMapper.toDto(
                 dictionaryRepository.modify(
-                        DictionaryMapper.fromDto(dictionary, userRepository.read(dictionary.getUserId()))));
+                        DictionaryMapper.fromDto(dictionary, userRepository.readById(dictionary.getUserId()))
+                )
+        );
     }
 
     public Boolean delete(final IdDto id) {
