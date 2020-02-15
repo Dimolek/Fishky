@@ -1,6 +1,7 @@
 package com.fishky.service;
 
 import com.fishky.dto.IdDto;
+import com.fishky.dto.NameDto;
 import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.mapper.UserMapper;
@@ -32,9 +33,15 @@ public class UserService {
         return IdDto.of(userRepository.save(userEntity));
     }
 
-    public UserDto read(final IdDto id) {
+    public UserDto readById(final IdDto id) {
         return UserMapper.toDto(
                 userRepository.readById(id.getId())
+        );
+    }
+
+    public IdDto readByUsername(final NameDto username) {
+        return UserMapper.toDto(
+                userRepository.readIdByUsername(username.getName())
         );
     }
 

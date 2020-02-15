@@ -13,13 +13,13 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = PRIVATE)
-public final class IdDto {
+public final class NameDto {
 
     @NotNull
     @NotEmpty
-    private Long id;
+    private String name;
 
-    public static IdDto of(final Long id) {
-        return new IdDto(id);
+    public static NameDto of(final String name) {
+        return new NameDto(name);
     }
 }

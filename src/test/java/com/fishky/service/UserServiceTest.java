@@ -73,7 +73,7 @@ class UserServiceTest {
         when(repository.readById(dto.getId())).thenReturn(userEntity);
 
         //when
-        UserDto resultUser = service.read(dto);
+        UserDto resultUser = service.readById(dto);
 
         //then
         assertAll("Should return correct user data",
@@ -92,7 +92,7 @@ class UserServiceTest {
         when(repository.readById(dto.getId())).thenReturn(null);
 
         //then
-        assertThrows(NullPointerException.class, () -> service.read(dto));
+        assertThrows(NullPointerException.class, () -> service.readById(dto));
     }
 
     @Test

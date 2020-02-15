@@ -10,8 +10,8 @@ import java.util.Collections;
 import java.util.Date;
 
 public class AuthenticationService {
-    static final long EXPIRATIONTIME = 894_000_00;
-    static final String SIHNINGKEY = "SecretKey";
+    static final long EXPIRATIONTIME = 21_600_000;
+    static final String SIHNINGKEY = "cfuYOgQhL_K67De64jymVfE1swdN1K7isAuU54ruYHUwlBSNYnh1Oa47fYgsuAmjgLVJ1OlP-tX54AFdw6nQwA";
     static final String PREFIX = "Bearer";
 
     static public void addToken(HttpServletResponse res, String username) {

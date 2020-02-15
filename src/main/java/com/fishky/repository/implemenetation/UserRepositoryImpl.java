@@ -24,10 +24,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Long readIdByUsername(final String s) {
+        return ormRepository.findByUsername(s).map(UserEntity::getIdUser).orElse(0L);
+    }
+
+    @Override
     public UserEntity readByUsername(final String s) {
         return ormRepository.findByUsername(s).orElse(null);
     }
-
 
     @Override
     public UserEntity modify(UserEntity user) {

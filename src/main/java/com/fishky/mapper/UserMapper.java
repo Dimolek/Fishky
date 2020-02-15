@@ -1,5 +1,6 @@
 package com.fishky.mapper;
 
+import com.fishky.dto.IdDto;
 import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.model.UserEntity;
@@ -32,5 +33,9 @@ public class UserMapper {
                 user.getIdUser(),
                 user.getUsername(),
                 user.getPassword());
+    }
+
+    public static IdDto toDto(Long id) {
+        return IdDto.of(id);
     }
 }
