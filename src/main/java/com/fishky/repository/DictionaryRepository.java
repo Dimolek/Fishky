@@ -7,7 +7,7 @@ import java.util.List;
 public interface DictionaryRepository {
     DictionaryEntity save(DictionaryEntity dictionary);
     DictionaryEntity read(Long id);
-    List<DictionaryEntity> readUsersDictionaries(Long userId);
+    List<DictionaryEntity> readUsersDictionaries(String userName);
     DictionaryEntity modify(DictionaryEntity dictionary);
     Boolean delete(Long id);
 

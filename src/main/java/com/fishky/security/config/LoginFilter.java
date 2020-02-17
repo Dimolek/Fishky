@@ -38,7 +38,6 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
                         Collections.emptyList()
                 )
         );
-
     }
 
     @Override

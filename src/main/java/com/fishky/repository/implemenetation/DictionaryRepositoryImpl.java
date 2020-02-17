@@ -43,8 +43,8 @@ public class DictionaryRepositoryImpl implements DictionaryRepository {
     }
 
     @Override
-    public List<DictionaryEntity> readUsersDictionaries(Long userId) {
-        return ormRepository.findByUser_IdUser(userId);
+    public List<DictionaryEntity> readUsersDictionaries(final String username) {
+        return ormRepository.findByUser_Username(username);
     }
 
     @Override

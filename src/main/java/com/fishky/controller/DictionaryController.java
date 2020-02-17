@@ -1,6 +1,7 @@
 package com.fishky.controller;
 
 import com.fishky.dto.IdDto;
+import com.fishky.dto.NameDto;
 import com.fishky.dto.dictionary.DictionaryCreateRequestDto;
 import com.fishky.dto.dictionary.DictionaryDto;
 import com.fishky.dto.dictionary.DictionaryResponseDto;
@@ -8,7 +9,10 @@ import com.fishky.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static com.fishky.security.service.AuthenticationService.decodeTokenIntoUsername;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -25,8 +29,8 @@ public class DictionaryController {
     private DictionaryService service;
 
     @PostMapping(value = ADD_DICTIONARY)
-    public DictionaryResponseDto add(@RequestBody final DictionaryCreateRequestDto dictionary) {
-        return service.add(dictionary);
+    public DictionaryResponseDto add(@RequestBody final DictionaryCreateRequestDto dictionary, final HttpServletRequest request) {
+        return service.add(dictionary, NameDto.of(decodeTokenIntoUsername(request)));
     }
 
     @GetMapping(value = FIND_DICTIONARY)
@@ -35,13 +39,13 @@ public class DictionaryController {
     }
 
     @GetMapping(value = FIND_USERS_DICTIONARIES)
-    public List<DictionaryDto> findUsersDictionaries(@RequestParam(value = ENTITY_ID) final String userId) {
-        return service.readUsersDictionaries(IdDto.of(Long.valueOf((userId))));
+    public List<DictionaryDto> findUsersDictionaries(final HttpServletRequest request) {
+        return service.readUsersDictionaries(NameDto.of(decodeTokenIntoUsername(request)));
     }
 
     @PutMapping(value = MODIFY_DICTIONARY)
-    public DictionaryDto modify(@RequestBody final DictionaryDto dictionary) {
-        return service.modify(dictionary);
+    public DictionaryDto modify(@RequestBody final DictionaryDto dictionary, final HttpServletRequest request) {
+        return service.modify(dictionary, NameDto.of(decodeTokenIntoUsername(request)));
     }
 
     @PostMapping(value = DELETE_DICTIONARY)

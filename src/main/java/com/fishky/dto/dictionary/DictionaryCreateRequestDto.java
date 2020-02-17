@@ -20,11 +20,7 @@ public final class DictionaryCreateRequestDto {
     @NotEmpty
     private final String language;
 
-    @NotNull
-    @NotEmpty
-    private final Long userId;
-
-    public static DictionaryCreateRequestDto of(final String name, final String language, final Long userId) {
-        return new DictionaryCreateRequestDto(name, language, userId);
+    public static DictionaryCreateRequestDto of(final String name, final String language) {
+        return new DictionaryCreateRequestDto(name, language);
     }
 }

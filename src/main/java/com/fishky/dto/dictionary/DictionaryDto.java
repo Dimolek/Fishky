@@ -25,11 +25,7 @@ public class DictionaryDto {
     @NotEmpty
     private final String language;
 
-    @NotNull
-    @NotEmpty
-    private final Long userId;
-
-    public static DictionaryDto of(final Long id, final String name, final String language, final Long userId) {
-        return new DictionaryDto(id, name, language, userId);
+    public static DictionaryDto of(final Long id, final String name, final String language) {
+        return new DictionaryDto(id, name, language);
     }
 }

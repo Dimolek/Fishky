@@ -1,6 +1,7 @@
 package com.fishky.service;
 
 import com.fishky.dto.IdDto;
+import com.fishky.dto.NameDto;
 import com.fishky.dto.dictionary.DictionaryCreateRequestDto;
 import com.fishky.dto.dictionary.DictionaryDto;
 import com.fishky.dto.dictionary.DictionaryResponseDto;
@@ -40,15 +41,15 @@ class DictionaryServiceTest {
     @Test
     void add_whenCorrectDictionaryContentIsProvided_thenNewDictionaryResponseDtoIsReturned() {
         //given
-        final DictionaryCreateRequestDto dictionaryDto = DictionaryCreateRequestDto.of("Unit2", "German", 12L);
+        final DictionaryCreateRequestDto dictionaryDto = DictionaryCreateRequestDto.of("Unit2", "German");
         final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final DictionaryEntity entity = new DictionaryEntity(16L,"Unit2", "German", userEntity);
 
         when(dictionaryRepository.save(any())).thenReturn(entity);
-        when(userRepository.readById(dictionaryDto.getUserId())).thenReturn(userEntity);
+        when(userRepository.readByUsername("TestUser")).thenReturn(userEntity);
 
         //when
-        DictionaryResponseDto dictionaryResponseDto = dictionaryService.add(dictionaryDto);
+        DictionaryResponseDto dictionaryResponseDto = dictionaryService.add(dictionaryDto, NameDto.of("TestUser"));
         //then
         assertAll("Should return correct dictionary data",
                 () -> assertEquals(16L, dictionaryResponseDto.getId()),
@@ -60,13 +61,13 @@ class DictionaryServiceTest {
     @Test
     public void add_whenIncorrectUserContentIsProvided_thenNullPointerExceptionIsThrown() {
         //given
-        final DictionaryCreateRequestDto dictionaryDto = DictionaryCreateRequestDto.of("User1", null, 12L);
+        final DictionaryCreateRequestDto dictionaryDto = DictionaryCreateRequestDto.of("User1", null);
 
         //when
         when(dictionaryRepository.save(any())).thenThrow(new NullPointerException());
 
         //then
-        assertThrows(NullPointerException.class, () -> dictionaryService.add(dictionaryDto));
+        assertThrows(NullPointerException.class, () -> dictionaryService.add(dictionaryDto, NameDto.of("User1")));
 
         // only mock is tested, need to implement validation methods
     }
@@ -109,14 +110,14 @@ class DictionaryServiceTest {
     @Test
     void readUsersDictionaries() {
         //given
-        final IdDto dto = IdDto.of(1L);
+        final NameDto dto = NameDto.of("User123");
         final UserEntity userEntity = new UserEntity(1L, "User123", "StrongPassword123", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final List<DictionaryEntity> dictionaryEntityList = new ArrayList<>();
 
         dictionaryEntityList.add(new DictionaryEntity(1L, "Unit 1", "English", userEntity));
         dictionaryEntityList.add(new DictionaryEntity(2L, "Kapitel zwei", "Deutsch", userEntity));
         dictionaryEntityList.add(new DictionaryEntity(3L, "Kapitel drei", "Deutsch", userEntity));
-        when(dictionaryRepository.readUsersDictionaries(dto.getId())).thenReturn(dictionaryEntityList);
+        when(dictionaryRepository.readUsersDictionaries(dto.getName())).thenReturn(dictionaryEntityList);
 
         //when
         List<DictionaryDto> usersDictionaries = dictionaryService.readUsersDictionaries(dto);
@@ -139,15 +140,15 @@ class DictionaryServiceTest {
     @Test
     void modify_whenCorrectDictionaryContentIsProvided_thenModifiedDictionaryIsReturned() {
         //given
-        final DictionaryDto dictionaryDto = DictionaryDto.of(39L,"Unit21", "English", 12L);
+        final DictionaryDto dictionaryDto = DictionaryDto.of(39L,"Unit21", "English");
         final UserEntity userEntity = new UserEntity(12L, "TestUser", "TestPassword", Timestamp.valueOf(LocalDateTime.now()), AccountRoles.USER);
         final DictionaryEntity dictionaryEntity = new DictionaryEntity(39L, "Unit21", "English", userEntity);
 
         when(dictionaryRepository.modify(any())).thenReturn(dictionaryEntity);
-        when(userRepository.readById(dictionaryDto.getUserId())).thenReturn(userEntity);
+        when(userRepository.readByUsername("Unit21")).thenReturn(userEntity);
 
         //when
-        DictionaryDto resultDictionary = dictionaryService.modify(dictionaryDto);
+        DictionaryDto resultDictionary = dictionaryService.modify(dictionaryDto, NameDto.of("Unit21"));
 
         //then
         assertAll("Should return correct, modified dictionary data",

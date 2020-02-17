@@ -1,6 +1,7 @@
 package com.fishky.service;
 
 import com.fishky.dto.IdDto;
+import com.fishky.dto.NameDto;
 import com.fishky.dto.dictionary.DictionaryCreateRequestDto;
 import com.fishky.dto.dictionary.DictionaryDto;
 import com.fishky.dto.dictionary.DictionaryResponseDto;
@@ -24,10 +25,10 @@ public class DictionaryService {
     private UserRepository userRepository;
 
 
-    public DictionaryResponseDto add(final DictionaryCreateRequestDto dictionary) {
+    public DictionaryResponseDto add(final DictionaryCreateRequestDto dictionary, final NameDto username) {
         return DictionaryMapper.toDto(
                         dictionaryRepository.save(
-                                DictionaryMapper.fromDto(dictionary, userRepository.readById(dictionary.getUserId()))
+                                DictionaryMapper.fromDto(dictionary, userRepository.readByUsername(username.getName()))
                         )
         );
     }
@@ -38,17 +39,17 @@ public class DictionaryService {
         );
     }
 
-    public List<DictionaryDto> readUsersDictionaries(IdDto userId) {
+    public List<DictionaryDto> readUsersDictionaries(final NameDto userName) {
         return DictionaryMapper.toDto(
-                dictionaryRepository.readUsersDictionaries(userId.getId())
+                dictionaryRepository.readUsersDictionaries(userName.getName())
         );
     }
 
 
-    public DictionaryResponseDto modify(final DictionaryDto dictionary) {
+    public DictionaryResponseDto modify(final DictionaryDto dictionary, final NameDto username) {
         return DictionaryMapper.toDto(
                 dictionaryRepository.modify(
-                        DictionaryMapper.fromDto(dictionary, userRepository.readById(dictionary.getUserId()))
+                        DictionaryMapper.fromDto(dictionary, userRepository.readByUsername(username.getName()))
                 )
         );
     }

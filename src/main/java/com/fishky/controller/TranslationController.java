@@ -16,7 +16,6 @@ public class TranslationController {
 
     private static final String ADD_TRANSLATION = "/addTranslation";
     private static final String ADD_TRANSLATION_COLLECTION = "/addTranslationCollection";
-    private static final String FIND_TRANSLATION = "/findTranslationById";
     private static final String MODIFY_TRANSLATION = "/modifyTranslation";
     private static final String DELETE_TRANSLATION = "/deleteTranslationById";
 

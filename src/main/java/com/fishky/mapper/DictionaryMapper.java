@@ -34,7 +34,6 @@ public class DictionaryMapper {
                 dictionary.getIdDictionary(),
                 dictionary.getName(),
                 dictionary.getLanguage(),
-                dictionary.getUser().getIdUser(),
                 Optional.ofNullable(dictionary.getTranslations())
                         .map(translationEntities -> translationEntities
                                 .stream()
@@ -49,8 +48,7 @@ public class DictionaryMapper {
                 .map(entity -> DictionaryDto.of(
                         entity.getIdDictionary(),
                         entity.getName(),
-                        entity.getLanguage(),
-                        entity.getUser().getIdUser()))
+                        entity.getLanguage()))
                 .collect(Collectors.toList());
     }
 }
