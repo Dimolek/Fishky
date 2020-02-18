@@ -17,7 +17,7 @@ An Internet application to help you train your language skills by imitating flas
 ## TODO:
 - [x] adding, editing and removing users and flashcards
 - [x] any form of GUI
-- [ ] user validation and basic security
-- [ ] advanced use of Spring Security
+- [ ] data validation
+- [x] user authentication using Spring Security and JWT
 - [ ] cover app with unit tests
 - [ ] integrate with Google Translate API
