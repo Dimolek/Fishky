@@ -12,7 +12,15 @@ An Internet application to help you train your language skills by imitating flas
 * [MySql](https://www.mysql.com/) - Database
 * [React](https://reactjs.org/) - Frontend
 
-
+## Functionality
+ - creating user accounts
+ - user login
+ - creating new dictionaries containing flashcards and storing them in database
+ - managing dictionaries and flashcards (delete, modify)
+ - choosing words in random manner in chosen language to allow practising
+ 
+ ## Screenshots
+ ![UI](https://cdn.discordapp.com/attachments/353086685002727425/679286235537342464/fishky.png)
 
 ## TODO:
 - [x] adding, editing and removing users and flashcards
