@@ -6,8 +6,10 @@ import com.fishky.dto.user.UserCreateRequestDto;
 import com.fishky.dto.user.UserDto;
 import com.fishky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -21,6 +23,7 @@ public class UserController {
     private static final String FIND_USER_BY_USERNAME = "/findUserByUsername";
     private static final String MODIFY_USER = "/modifyUser";
     private static final String DELETE_USER = "/deleteUserById";
+    private static final String CHECK_AUTHENTICATION = "/checkAuthentication";
 
 
     @Autowired
@@ -49,5 +52,10 @@ public class UserController {
     @DeleteMapping(value = DELETE_USER)
     public Boolean delete(@RequestBody final IdDto id) {
         return service.delete(id);
+    }
+
+    @GetMapping(value = CHECK_AUTHENTICATION)
+    public ResponseEntity<String> checkAuthentication(final HttpServletRequest request) {
+        return service.checkAuthentication(request);
     }
 }

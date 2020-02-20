@@ -23,6 +23,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
     public LoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
+
     }
 
     @Override

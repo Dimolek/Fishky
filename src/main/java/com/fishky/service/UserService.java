@@ -8,10 +8,14 @@ import com.fishky.mapper.UserMapper;
 import com.fishky.model.UserEntity;
 import com.fishky.policy.UserPolicy;
 import com.fishky.repository.UserRepository;
+import com.fishky.security.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 @Transactional
@@ -25,6 +29,7 @@ public class UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public IdDto add(final UserCreateRequestDto user) {
         userPolicy.userExists(user.getUsername());
@@ -58,6 +63,10 @@ public class UserService {
     public Boolean delete(final IdDto id) {
         //Also, delete all dependent dictionaries
         return userRepository.delete(id.getId());
+    }
+
+    public ResponseEntity<String> checkAuthentication(HttpServletRequest request) {
+        return userPolicy.checkAuthentication(AuthenticationService.getAuthentication(request));
     }
 
 }

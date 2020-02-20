@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 
 public class AuthenticationService {
-    static final long EXPIRATIONTIME = 21_600_000;
+    static final long EXPIRATIONTIME = 21_600_000; //6 hours
     static final String PREFIX = "Bearer";
 
     static public void addToken(HttpServletResponse res, String username) {
