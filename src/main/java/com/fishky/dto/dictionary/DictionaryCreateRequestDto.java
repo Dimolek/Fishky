@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@NoArgsConstructor(force=true)
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
 public final class DictionaryCreateRequestDto {
