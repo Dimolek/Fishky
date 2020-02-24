@@ -1,5 +1,5 @@
 # Fishky
-An Internet application to help you train your language skills by imitating flashcards (Polish: fiszki). Main purpose of this project is to improve programming abilities but also to provide some useful functionality. Currently in early development phase. It is being created by [@Dimolek](https://github.com/Dimolek/) and [@MateuszSochacki](https://github.com/MateuszSochacki).
+An Internet application to help you train your language skills by imitating flashcards (Polish: fiszki). Main purpose of this project is to improve programming abilities but also to provide some useful functionality. Current version is 1.0.0. It is being created by [@Dimolek](https://github.com/Dimolek/) and [@MateuszSochacki](https://github.com/MateuszSochacki).
 
 ## Built with
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE
@@ -25,7 +25,8 @@ An Internet application to help you train your language skills by imitating flas
 ## TODO:
 - [x] adding, editing and removing users and flashcards
 - [x] any form of GUI
-- [ ] data validation
+- [x] data validation
 - [x] user authentication using Spring Security and JWT
 - [ ] cover app with unit tests
 - [ ] integrate with Google Translate API
+- [ ] create Polish version
