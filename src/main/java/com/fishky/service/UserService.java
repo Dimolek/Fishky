@@ -30,31 +30,33 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     public IdDto add(final UserCreateRequestDto user) {
-        userPolicy.userExists(user.getUsername());
+        userPolicy.userAlreadyExists(user.getUsername());
         UserEntity userEntity = UserMapper.fromDto(user);
         userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
         return IdDto.of(userRepository.save(userEntity));
     }
 
     public UserDto readById(final IdDto id) {
+
         return UserMapper.toDto(
                 userRepository.readById(id.getId())
         );
     }
 
     public IdDto readByUsername(final NameDto username) {
+        userPolicy.userExists(username.getName());
         return UserMapper.toDto(
                 userRepository.readIdByUsername(username.getName())
         );
     }
 
     public UserDto modify(final UserDto user) {
+        userPolicy.userExists(user.getUsername());
         return UserMapper.toDto(
                 userRepository.modify(
                         UserMapper.fromDto(user,
-                                userRepository.readById(user.getId()).getCreateTime().toLocalDateTime()
+                                userRepository.readByUsername(user.getUsername()).getCreateTime().toLocalDateTime()
                         )
                 )
         );
@@ -62,6 +64,7 @@ public class UserService {
 
     public Boolean delete(final IdDto id) {
         //Also, delete all dependent dictionaries
+        userPolicy.userExists(id.getId());
         return userRepository.delete(id.getId());
     }
 

@@ -12,13 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 
@@ -34,6 +34,9 @@ class UserServiceTest {
     @Mock
     private UserRepository repository;
 
+    @Mock
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     void add_whenCorrectUserContentIsProvided_thenNewIdIsReturned() {
         //given
@@ -41,7 +44,8 @@ class UserServiceTest {
         final UserCreateRequestDto userDto = UserCreateRequestDto.of("User1", "qwerty", "qwerty");
 
         when(repository.save(any())).thenReturn(id);
-        doNothing().when(userPolicy).userExists(any());
+        //doNothing().when(userPolicy).userExists("User1");
+        when(bCryptPasswordEncoder.encode(userDto.getPassword())).thenReturn("dfjksdhfsjkdfhskjdfhskjdfhsjkdfh");
 
         //when
         IdDto idDto = service.add(userDto);

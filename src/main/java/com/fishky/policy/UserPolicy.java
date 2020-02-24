@@ -13,9 +13,19 @@ public class UserPolicy {
     @Autowired
     private UserOrmRepository ormRepository;
 
-    public void userExists(final String username) {
+    public void userAlreadyExists(final String username) {
         if (ormRepository.existsByUsername(username))
             throw (new RuntimeException("User already exists"));
+    }
+
+    public void userExists(final Long id) {
+        if (!ormRepository.existsById(id))
+            throw (new RuntimeException("User does not exist"));
+    }
+
+    public void userExists(final String username) {
+        if (!ormRepository.existsByUsername(username))
+            throw (new RuntimeException("User does not exist"));
     }
 
     public ResponseEntity<String> checkAuthentication(final UsernamePasswordAuthenticationToken user) {
